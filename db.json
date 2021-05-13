@@ -1,0 +1,75 @@
+{
+    "films": [
+        {
+            "id": 0,
+            "name": "Incredibles",
+            "description": "film o superbohaterach",
+            "yearOfRelease": 2004,
+            "genere": "animacja" 
+        },
+        {
+            "id": 1,
+            "name": "Sedzia",
+            "description": "Odnoszący sukcesy adwokat powraca do rodzinnego miasta na pogrzeb matki, gdzie dowiaduje się, że jego ojciec, miejscowy sędzia, podejrzany jest o morderstwo",
+            "yearOfRelease": 2014,
+            "genere": "dramat" 
+        }
+    ],
+
+    "actors": [
+        {
+            "id": 0,
+            "name": "Holly Hunter",
+            "yearOfBirth": 1958,
+            "heightCM": 157,
+            "placeOfBirth": "Coneyers"
+        },
+
+        {
+            "id": 1,
+            "name": "Samuel L Jackson",
+            "yearOfBirth": 1948,
+            "heightCM": 189,
+            "placeOfBirth": "Waszyngton"
+        },
+
+        {
+            "id": 2,
+            "name": "Elizabeth Pena",
+            "yearOfBirth": 1959,
+            "heightCM": 157,
+            "placeOfBirth": "Elizabeth"
+        },
+
+        {
+            "id": 3,
+            "name": "Billy Bob Thorton",
+            "yearOfBirth": 1955,
+            "heightCM": 178,
+            "placeOfBirth": "Hot Springs"
+        }
+    ],
+
+    "cast":[
+        {
+            "filmId": 0,
+            "actorId": 0,
+            "roleName": "Elastyna"
+        },
+        {
+            "filmId": 0,
+            "actorId": 1,
+            "roleName": "Mrożon"
+        },
+        {
+            "filmId": 0,
+            "actorId": 2,
+            "roleName": "Mirage"
+        },
+        {
+            "filmId": 1,
+            "actorId": 3,
+            "roleName": "Dwight Dickham"
+        }
+    ]
+}
