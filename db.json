@@ -4,14 +4,14 @@
             "id": 0,
             "name": "Incredibles",
             "description": "film o superbohaterach",
-            "yearOfRelease": 2004,
+            "dateOfRelease": 2004,
             "genere": "animacja" 
         },
         {
             "id": 1,
             "name": "Sedzia",
             "description": "Odnoszący sukcesy adwokat powraca do rodzinnego miasta na pogrzeb matki, gdzie dowiaduje się, że jego ojciec, miejscowy sędzia, podejrzany jest o morderstwo",
-            "yearOfRelease": 2014,
+            "dateOfRelease": 2014,
             "genere": "dramat" 
         }
     ],
