@@ -10,12 +10,14 @@ var moviesBaseUrl = "http://localhost:3000/films";
 var actorsBaseUrl = "http://localhost:3000/actors";
 var castBaseUrl = "http://localhost:3000/cast";
 
-fetch(moviesBaseUrl)
-    .then(response => response.json())
-    .then(json => {mainElement.movieDatabase = json;})
+//loading a list of movies
+axios.get(moviesBaseUrl)
+    .then(response => {
+        mainElement.movieDatabase = response.data
+    })
+    .catch(error => console.log(error))     
+
+axios.get(actorsBaseUrl)
+    .then(response => {mainElement.actorsDatabase = response.data})
     .catch(error => console.log(error))
 
-fetch(actorsBaseUrl)
-    .then(response => response.json())
-    .then(json => {mainElement.actorsDatabase = json})
-    .catch(error => console.log(error))

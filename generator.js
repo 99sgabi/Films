@@ -47,3 +47,4 @@ module.exports = function(){
 //https://egghead.io/lessons/javascript-creating-demo-apis-with-json-server
 //https://www.npmjs.com/package/json-server
 //https://github.com/marak/Faker.js/
+//https://www.npmjs.com/package/json-server-relationship#relationships

@@ -2,11 +2,22 @@
 <html>
     <div id="app">
         <h1>Movies:</h1>
-        <p>{{movieDatabase}}</p>
+        <p v-for="movie in movieDatabase">
+            <b>
+                {{ movie }}
+            </b>
+            <p v-for="actors in movie.actors">
+                {{ movie.actor }}
+            </p>
+        </p>
+        
+        <hr/>
+        <hr/>
         <h1>Actors</h1>
-        <p>{{actorsDatabase}}</p>
+        <p v-for="actor in actorsDatabase">{{ actor }}</p>
 
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="javascript.js"></script>
 </html>
