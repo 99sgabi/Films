@@ -46,3 +46,4 @@ module.exports = function(){
 //https://developer.mozilla.org/pl/docs/Web/JavaScript/Reference/Global_Objects/Date
 //https://egghead.io/lessons/javascript-creating-demo-apis-with-json-server
 //https://www.npmjs.com/package/json-server
+//https://github.com/marak/Faker.js/
