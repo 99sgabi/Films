@@ -1,29 +1,48 @@
-actors: lodash.times(100, (n) => {
-    return{
-       id: n + 1,
-       name: faker.name.findName(),
-       placeOfBirth: faker.city.cityName(),
-       description: faker.lorem.sentences(),
-       yearOfBirth: faker.date.year($max = 'now'),
-       heightCM: faker.base.numberBetween($min = 150, $max = 210),
-     }
-});
-films: lodash.times(100, (n) => {
-    return{
-       id: n + 1,
-       name: faker.lorem.word(),
-       avatar: faker.image.avatar(),
-       description: faker.lorem.sentences(),
-       dateOfRelease: faker.date.iso8601($max = 'now') ,
-       genere: faker.base.randomElement($array = array ('dramat','komedia','romans', 'horror'))
-     }
-});
-cast: lodash.times(100, (n) => {
-    return{
-       filmId: n + 1,
-       actorId: faker.base.numberBetween($min = 0, $max = 100),
-       role: faker.name.findName(),
-    }
-})
+module.exports = function(){
+	var faker = require("faker");
+	var lodash = require("lodash");
+	return{
+		actors: lodash.times(101, (n) => {
+			return{
+			id: n,
+			name: faker.name.findName(),
+			placeOfBirth: faker.address.city(),
+			description: faker.lorem.sentences(),
+			yearOfBirth: faker.datatype.number({
+					'min': 1900,
+					'max': 2014
+				}),
+			heightCM: faker.datatype.number({
+					'min': 150,
+					'max': 210
+				}),
+			}
+		}),
+		films: lodash.times(101, (n) => {
+			return{
+			id: n,
+			name: faker.lorem.word(),
+			avatar: faker.image.image(),
+			description: faker.lorem.sentences(),
+			dateOfRelease: faker.date.past() ,
+			genere: faker.helpers.randomize(['dramat','komedia','romans', 'horror'])
+			}
+		}),
+		cast: lodash.times(200, (n) => {
+			let aId = faker.datatype.number({
+				'min': 0,
+				'max': 50
+			})
+			return{
+			filmId: Math.floor((n+1)/2),
+			actorId: n%2 == 0 ? 2*aId : 2*aId + 1,
+			role: faker.name.findName(),
+			}
+		})
+	}
+}
+
 //https://github.com/fzaninotto/Faker
 //https://developer.mozilla.org/pl/docs/Web/JavaScript/Reference/Global_Objects/Date
+//https://egghead.io/lessons/javascript-creating-demo-apis-with-json-server
+//https://www.npmjs.com/package/json-server
