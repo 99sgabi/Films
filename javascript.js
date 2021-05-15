@@ -78,6 +78,7 @@ var mainElement = new Vue({
         },
         addActorToMovie()
         {
+            let thiselement = this;
             if(this.roleName != "" && this.roleActor != "" && this.roleFilm !="")
             {
                 let cast = {
@@ -85,13 +86,15 @@ var mainElement = new Vue({
                     actorId: this.roleActor.id,
                     filmId: this.roleFilm.id
                 }
-                console.log(this.roleActor.id)
-                console.log(this.roleFilm.id)
                 axios.post(castBaseUrl, cast)
                     .then(response => {
-                        
-                    })
-                    .catch(error => console.log(error))
+                        axios.get(moviesActorsAllURL)
+                        .then(response =>{
+                            mainElement.movieActorsDatabase = response.data;
+                        })
+                        .catch(error => console.log(error))     
+                })
+                .catch(error => console.log(error))
             }
             this.roleName = ""
             this.roleActor = "" 
@@ -140,8 +143,16 @@ var mainElement = new Vue({
         filteredMovies(nameCriteria, dateCriteria, actorsCriteria, genereCriteria)
         {
             
+        },
+    },
+    watch: {
+        actorsOfTheMovie(movieId) {
+            return this.movieActorsDatabase.filter( function(movieActor){
+                return movieActor.filmId == movieId
+            })
         }
     },
+       
     components:
     {
         'movie': movieComponent,
