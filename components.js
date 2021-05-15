@@ -26,11 +26,11 @@ let movieComponent =
                         </ul>
                     </div>
                     <div style="float:left;width:10%">
-                        <button>
+                        <button v-on:click="$emit('edit', movie)">
                             Edytuj
                         </button>
                         <br/>
-                        <button>
+                        <button v-on:click="$emit('delete', movie)">
                             Usuń
                         </button>
                     </div>

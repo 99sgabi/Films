@@ -1601,22 +1601,6 @@
       "description": "Rem nihil nihil. Nemo molestiae porro ea omnis ad consectetur maxime.",
       "dateOfRelease": "2020-07-26T15:40:42.454Z",
       "genere": "romans"
-    },
-    {
-      "id": 99,
-      "name": "perferendis",
-      "avatar": "http://placeimg.com/640/480/abstract",
-      "description": "Vero voluptas aspernatur. Itaque iusto labore autem aliquid.",
-      "dateOfRelease": "2020-09-15T02:47:18.628Z",
-      "genere": "dramat"
-    },
-    {
-      "id": 100,
-      "name": "sed",
-      "avatar": "http://placeimg.com/640/480/food",
-      "description": "Et cumque ab molestiae quia. Qui et numquam quas enim qui corrupti. Autem pariatur est accusantium libero. Quia enim quia dolor.",
-      "dateOfRelease": "2020-10-11T15:58:53.310Z",
-      "genere": "horror"
     }
   ],
   "cast": [

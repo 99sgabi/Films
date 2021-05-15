@@ -4,6 +4,10 @@ var mainElement = new Vue({
         movieDatabase: {},
         movieActorsDatabase: [],
         actorsDatabase: {},
+        movieTitle: "",
+        movieDescription: "",
+        movieDateOfRelease: "",
+        movieGenere: ""
     },
     methods: {
         getActors(movieId)
@@ -19,21 +23,43 @@ var mainElement = new Vue({
         },
         addMovie()
         {
-
+            if(this.movieTitle != "" && this.movieDescription != "" && this.movieGenere !="" && this.movieDateOfRelease != "")
+            {
+                let movie = {
+                    avatar : "",
+                    name: this.movieTitle,
+                    description: this.movieDescription,
+                    dateOfRelease: this.movieDateOfRelease,
+                    genere : this.movieGenere
+                }
+                console.log(moviesBaseUrl)
+                axios.post(moviesBaseUrl, movie)
+                    .then(response => this.movieDatabase.push(response.data))
+            }
+            this.movieTitle = ""
+            this.movieDescription = "" 
+            this.movieGenere =""
+            this.movieDateOfRelease = ""
         },
         addActorToMovie()
         {
 
         },
-        deleteActor()
-        {
-
-        },
-        deleteMovie()
+        deleteActor(actor)
         {
             
         },
-        deleteActorFromTheMovie()
+        deleteMovie(movie)
+        {
+            axios.delete(moviesBaseUrl + "/" + movie.id)
+                .then(response => 
+                    {
+                        this.movieDatabase.splice(
+                            this.movieDatabase.indexOf(movie), 1
+                        )
+                    })
+        },
+        deleteActorFromTheMovie(role)
         {
             
         },
@@ -47,7 +73,7 @@ var mainElement = new Vue({
         },
         editRoleOfTheActorInTheMovie()
         {
-            
+
         }
     },
     computed: {

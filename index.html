@@ -1,14 +1,57 @@
 <!DOCTYPE html>
 <html>
     <div id="app">
-        <h1>Movies:</h1>
-        <movie v-for="movie in movieDatabase" :key="movie.id" :movie="movie" :cast="getActors(movie.id)">
-        </movie>
+        <div style="display:flex">
+            <div style="float:left;width:33%">
+                <h1>Dodaj film :</h1>
+
+                <form v-on:submit.prevent="addMovie">
+                    <label>
+                        Tytuł:
+                    </label><br/>
+                    <input v-model="movieTitle">
+                    <br/>
+                    <label>
+                        Opis:
+                    </label>
+                    <br/>
+                    <textarea v-model="movieDescription"></textarea>
+                    <br/>
+                    <label>
+                        Data:
+                    </label>
+                    <br/>
+                    <input type="date" v-model="movieDateOfRelease">
+                    <br/>
+                    <label>
+                        Gatunek:
+                    </label>
+                    <br/>
+                    <select v-model="movieGenere">
+                        <option>komedia</option>
+                        <option>romans</option>
+                        <option>horror</option>
+                        <option>dramat</option>
+                    </select>   
+                    <br/>
+                    <input type="submit" value="Wyślij">
+                </form>
+            </div>
+            <div style="float:left;width:33%">
+                <h1>Add actor:</h1>
+            </div>
+            <div style="float:left;width:33%">
+                <h1>Add role:</h1>
+            </div>
+        </div>
         
         <hr/>
         <hr/>
-        <h1>Actors</h1>
-        <p v-for="actor in actorsDatabase">{{ actor }}</p>
+        <h1>Movies:</h1>
+        <movie v-for="movie in movieDatabase" :key="movie.id" :movie="movie" :cast="getActors(movie.id)" 
+            v-on:delete="deleteMovie" v-on:edit="editMovie">
+        </movie>
+
 
     </div>
     
