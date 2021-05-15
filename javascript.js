@@ -1,7 +1,3 @@
-import Vue from "vue";
-import Movie from "./Movie.vue";
-
-
 var mainElement = new Vue({
     el: "#app",
     data: { 
@@ -17,17 +13,55 @@ var mainElement = new Vue({
             })
             return filteredElements
         },
+        addActor()
+        {
+
+        },
+        addMovie()
+        {
+
+        },
+        addActorToMovie()
+        {
+
+        },
+        deleteActor()
+        {
+
+        },
+        deleteMovie()
+        {
+            
+        },
+        deleteActorFromTheMovie()
+        {
+            
+        },
+        editActor()
+        {
+
+        },
+        editMovie()
+        {
+
+        },
+        editRoleOfTheActorInTheMovie()
+        {
+            
+        }
     },
     computed: {
         filteredMovies(nameCriteria, dateCriteria, actorsCriteria, genereCriteria)
         {
-
+            
         }
     },
-    components:{
-        Movie,
+    components:
+    {
+        'movie': movieComponent,
     }
 })
+
 var baseUrl = "http://localhost:3001";
 var moviesBaseUrl = "http://localhost:3001/films";
 var actorsBaseUrl = "http://localhost:3001/actors";
