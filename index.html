@@ -2,14 +2,18 @@
 <html>
     <div id="app">
         <h1>Movies:</h1>
-        <p v-for="movie in movieDatabase">
+        <!--<span v-for="movie in movieDatabase">
             <b>
-                {{ movie }}
+                {{ movie.name }}
             </b>
-            <p v-for="actors in movie.actors">
-                {{ movie.actor }}
-            </p>
-        </p>
+            <ul>
+                <li v-for="castElemement in getActors(movie.id)">
+                    {{ castElemement.actor && castElemement.actor.name }}
+                </li>
+            </ul>
+        </span>-->
+        <Movie v-for="movie in movieDatabase" :key="movie.id" :movie="movie" :cast="getActors(movie.id)">
+        </Movie>
         
         <hr/>
         <hr/>
@@ -17,7 +21,8 @@
         <p v-for="actor in actorsDatabase">{{ actor }}</p>
 
     </div>
+    
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="javascript.js"></script>
+    <script type="module" src="./javascript.js"></script>
 </html>
