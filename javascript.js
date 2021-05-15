@@ -7,7 +7,9 @@ var mainElement = new Vue({
         movieTitle: "",
         movieDescription: "",
         movieDateOfRelease: "",
-        movieGenere: ""
+        movieGenere: "",
+        movieAvatar: "",
+        movieEdited: null
     },
     methods: {
         getActors(movieId)
@@ -25,21 +27,53 @@ var mainElement = new Vue({
         {
             if(this.movieTitle != "" && this.movieDescription != "" && this.movieGenere !="" && this.movieDateOfRelease != "")
             {
-                let movie = {
-                    avatar : "",
-                    name: this.movieTitle,
-                    description: this.movieDescription,
-                    dateOfRelease: this.movieDateOfRelease,
-                    genere : this.movieGenere
+                if(this.movieEdited != null)
+                {
+                    console.log(this.movieAvatar)
+                    axios.put(moviesBaseUrl+ "/" + this.movieEdited.id, {
+                            avatar : this.movieAvatar,
+                            name: this.movieTitle,
+                            description: this.movieDescription,
+                            dateOfRelease: this.movieDateOfRelease,
+                            genere : this.movieGenere
+                        })
+                        .then(response => {
+                            this.movieEdited = response.data
+                            this.movieEdited = null})
+                        .then(response => {
+                            axios.get(moviesBaseUrl)
+                                    .then(moviesResponse =>{
+                                        mainElement.movieDatabase = moviesResponse.data;
+                                    })
+                                    .catch(error => console.log(error))     
+
+                        })
+                    
+                    console.log("here1")
+                    
                 }
-                console.log(moviesBaseUrl)
-                axios.post(moviesBaseUrl, movie)
-                    .then(response => this.movieDatabase.push(response.data))
+                else
+                {
+                    let movie = {
+                        avatar : this.movieAvatar,
+                        name: this.movieTitle,
+                        description: this.movieDescription,
+                        dateOfRelease: this.movieDateOfRelease,
+                        genere : this.movieGenere
+                    }
+                    console.log(moviesBaseUrl)
+                    axios.post(moviesBaseUrl, movie)
+                        .then(response => this.movieDatabase.push(response.data))
+                    
+                    console.log("here222")
+                }
+                
             }
             this.movieTitle = ""
             this.movieDescription = "" 
             this.movieGenere =""
             this.movieDateOfRelease = ""
+            this.movieAvatar = ""
         },
         addActorToMovie()
         {
@@ -67,9 +101,17 @@ var mainElement = new Vue({
         {
 
         },
-        editMovie()
+        editMovie(movie)
         {
-
+            if(this.movieEdited == null)
+            {
+                this.movieEdited = movie;
+                this.movieTitle = movie.name;
+                this.movieDescription = movie.description;
+                this.movieGenere = movie.genere;
+                this.movieDateOfRelease = movie.dateOfRelease;
+                this.movieAvatar = movie.avatar;
+            }
         },
         editRoleOfTheActorInTheMovie()
         {

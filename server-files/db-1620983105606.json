@@ -811,28 +811,28 @@
   ],
   "films": [
     {
-      "id": 0,
-      "name": "quis",
-      "avatar": "http://placeimg.com/640/480/transport",
+      "avatar": "https://wi.pb.edu.pl/wp-content/uploads/2018/03/WI_50px_black.png",
+      "name": "quis123",
       "description": "Id debitis qui incidunt ut omnis natus eligendi. Ea laboriosam dolore qui doloribus eligendi consequatur cupiditate veniam et.",
-      "dateOfRelease": "2020-08-29T19:44:26.835Z",
-      "genere": "dramat"
+      "dateOfRelease": "2021-06-01",
+      "genere": "dramat",
+      "id": 0
     },
     {
-      "id": 1,
+      "avatar": "https://wi.pb.edu.pl/wp-content/uploads/2018/03/WI_50px.png",
       "name": "eius",
-      "avatar": "http://placeimg.com/640/480/sports",
       "description": "Recusandae tempora sapiente est tenetur. Aut architecto expedita exercitationem nihil quia cupiditate. Quasi aut deleniti dignissimos modi libero.",
-      "dateOfRelease": "2020-07-30T19:10:47.854Z",
-      "genere": "dramat"
+      "dateOfRelease": "2021-05-26",
+      "genere": "dramat",
+      "id": 1
     },
     {
-      "id": 2,
+      "avatar": "https://wi.pb.edu.pl/wp-content/uploads/2018/03/WI_50px_black.png",
       "name": "veniam",
-      "avatar": "http://placeimg.com/640/480/animals",
       "description": "Et aliquam quo eligendi rem. Dolorum doloremque delectus accusamus. Illo excepturi magnam. Et quis magni.",
       "dateOfRelease": "2021-04-03T05:29:32.698Z",
-      "genere": "dramat"
+      "genere": "dramat",
+      "id": 2
     },
     {
       "id": 3,
@@ -1601,6 +1601,14 @@
       "description": "Rem nihil nihil. Nemo molestiae porro ea omnis ad consectetur maxime.",
       "dateOfRelease": "2020-07-26T15:40:42.454Z",
       "genere": "romans"
+    },
+    {
+      "avatar": "",
+      "name": "quiiiid",
+      "description": "to nowe",
+      "dateOfRelease": "2021-05-12",
+      "genere": "romans",
+      "id": 102
     }
   ],
   "cast": [

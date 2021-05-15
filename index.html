@@ -34,6 +34,11 @@
                         <option>dramat</option>
                     </select>   
                     <br/>
+                    <label>
+                        Url do plakatu:
+                    </label><br/>
+                    <input type="url" v-model="movieAvatar">
+                    <br/>
                     <input type="submit" value="Wyślij">
                 </form>
             </div>
@@ -49,7 +54,7 @@
         <hr/>
         <h1>Movies:</h1>
         <movie v-for="movie in movieDatabase" :key="movie.id" :movie="movie" :cast="getActors(movie.id)" 
-            v-on:delete="deleteMovie" v-on:edit="editMovie">
+            v-on:delete="deleteMovie" v-on:edit="editMovie" :movieEdited="movieEdited">
         </movie>
 
 
