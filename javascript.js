@@ -9,7 +9,10 @@ var mainElement = new Vue({
         movieDateOfRelease: "",
         movieGenere: "",
         movieAvatar: "",
-        movieEdited: null
+        movieEdited: null,
+        roleFilm: "",
+        roleActor: "",
+        roleName: ""
     },
     methods: {
         getActors(movieId)
@@ -61,11 +64,9 @@ var mainElement = new Vue({
                         dateOfRelease: this.movieDateOfRelease,
                         genere : this.movieGenere
                     }
-                    console.log(moviesBaseUrl)
                     axios.post(moviesBaseUrl, movie)
                         .then(response => this.movieDatabase.push(response.data))
                     
-                    console.log("here222")
                 }
                 
             }
@@ -77,7 +78,24 @@ var mainElement = new Vue({
         },
         addActorToMovie()
         {
-
+            if(this.roleName != "" && this.roleActor != "" && this.roleFilm !="")
+            {
+                let cast = {
+                    role: this.roleName,
+                    actorId: this.roleActor.id,
+                    filmId: this.roleFilm.id
+                }
+                console.log(this.roleActor.id)
+                console.log(this.roleFilm.id)
+                axios.post(castBaseUrl, cast)
+                    .then(response => {
+                        
+                    })
+                    .catch(error => console.log(error))
+            }
+            this.roleName = ""
+            this.roleActor = "" 
+            this.roleFilm =""
         },
         deleteActor(actor)
         {
@@ -133,6 +151,7 @@ var mainElement = new Vue({
 var baseUrl = "http://localhost:3001";
 var moviesBaseUrl = "http://localhost:3001/films";
 var actorsBaseUrl = "http://localhost:3001/actors";
+var castBaseUrl = "http://localhost:3001/cast";
 var movieActorsURL = (id) => `http://localhost:3001/films/${id}/actors`;
 var moviesActorsAllURL = "http://localhost:3001/films/actors";
 var actorsMovieURL =  (id) => `http://localhost:3001/actors/${id}/films`;

@@ -46,7 +46,33 @@
                 <h1>Add actor:</h1>
             </div>
             <div style="float:left;width:33%">
-                <h1>Add role:</h1>
+                <h1>Dodaj role:</h1>
+                <form v-on:submit.prevent="addActorToMovie">
+                    <label>
+                        Rola:
+                    </label><br/>
+                    <input v-model="roleName">
+                    <br/>
+                    <label>
+                        Film:
+                    </label>
+                    <select v-model="roleFilm">
+                        <option v-for="movie in movieDatabase" :value="movie">{{ movie.name }}</option>
+                    </select>   
+                    <br/>
+                    
+                    <br/>
+                    <label>
+                        Aktor:
+                    </label>
+                    <select v-model="roleActor">
+                        <option v-for="actor in actorsDatabase" :value="actor">{{ actor.name }}</option>
+                    </select>   
+                    <br/>
+                    
+                    <br/>
+                    <input type="submit" value="Wyślij">
+                </form>
             </div>
         </div>
         
