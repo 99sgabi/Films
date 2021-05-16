@@ -34,9 +34,10 @@ module.exports = function(){
 				'max': 50
 			})
 			return{
-			id: n,
-			filmId: Math.floor((n+1)/2),
-			actorId: n%2 == 0 ? 2*aId : 2*aId + 1,
+			id: {
+				filmId: Math.floor((n+1)/2),
+				actorId: n%2 == 0 ? 2*aId : 2*aId + 1 
+			},
 			role: faker.name.findName(),
 			}
 		})

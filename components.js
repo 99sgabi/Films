@@ -36,3 +36,41 @@ let movieComponent =
                     </div>
                 </div>`
 }//)
+
+let actorComponent = 
+{
+    props: ["actor", "movies"],
+    template : `<div style="display: flex">
+                    <div style="float:left;width:90%">
+                        <div>
+                            <h1 style="color:blue">
+                                Actor name: {{ actor.name }}
+                            </h1>
+                            
+                        </div>
+                        <p>
+                            Description: {{ actor.description }}
+                        </p>
+                        <p>
+                            Place Of Birth: {{ actor.placeOfBirth }}
+                        </p>
+                        <p>
+                            height: {{ actor.heightCM }}
+                        </p>
+                        <ul>
+                            <li v-for="movie in movies" v-bind:key="movie.filmId">
+                            {{ movie.film && movie.film.name }}
+                            </li>
+                        </ul>
+                    </div>
+                    <div style="float:left;width:10%">
+                        <button v-on:click="$emit('edit', actor)">
+                            Edytuj
+                        </button>
+                        <br/>
+                        <button v-on:click="$emit('delete', actor)">
+                            Usuń
+                        </button>
+                    </div>
+                </div>`
+}

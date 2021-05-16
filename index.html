@@ -43,7 +43,38 @@
                 </form>
             </div>
             <div style="float:left;width:33%">
-                <h1>Add actor:</h1>
+                <h1>Dodaj aktora:</h1>
+                <form v-on:submit.prevent="addActor">
+                    <label>
+                        Imię aktora:
+                    </label><br/>
+                    <input v-model="actorName">
+                    <br/>
+                    <label>
+                        Opis:
+                    </label>
+                    <br/>
+                    <textarea v-model="actorDescription"></textarea>
+                    <br/>
+                    <label>
+                        Rok urodzenia:
+                    </label>
+                    <br/>
+                    <input type="number" v-model="actorYearOfBirth">
+                    <br/>
+                    <label>
+                        Miejsce urodzenia:
+                    </label><br/>
+                    <input v-model="actorPlaceOfBirth">
+                    <br/>
+                    <label>
+                        Wzrost:
+                    </label>
+                    <br/>
+                    <input type="number" v-model="actorHeightCM">
+                    <br/>
+                    <input type="submit" value="Wyślij">
+                </form>
             </div>
             <div style="float:left;width:33%">
                 <h1>Dodaj role:</h1>
@@ -77,12 +108,17 @@
         </div>
         
         <hr/>
-        <hr/>
+        <hr/><!--
         <h1>Movies:</h1>
-        <movie v-for="movie in movieDatabase" :key="movie.id" :movie="movie" :cast="getActors(movie.id)" 
+        <movie v-for="movie in movieDatabase" :key="movie.id" :movie="movie" :cast="movieActors(movie.id)" 
             v-on:delete="deleteMovie" v-on:edit="editMovie" :movieEdited="movieEdited">
         </movie>
-
+        <hr/>
+        <hr/>-->
+        <h1>Aktorzy:</h1>
+        <actor v-for="actor in actorsDatabase" :key="actor.id" :actor="actor" :movies="actorsMovies(actor.id)" 
+            v-on:delete="deleteActor" v-on:edit="editActor" >
+        </actor>    
 
     </div>
     

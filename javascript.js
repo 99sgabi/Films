@@ -1,9 +1,10 @@
 var mainElement = new Vue({
     el: "#app",
     data: { 
-        movieDatabase: {},
+        movieDatabase: [],
         movieActorsDatabase: [],
-        actorsDatabase: {},
+        actorsDatabase: [],
+        actorsMoviesDatabase: [],
         movieTitle: "",
         movieDescription: "",
         movieDateOfRelease: "",
@@ -12,7 +13,13 @@ var mainElement = new Vue({
         movieEdited: null,
         roleFilm: "",
         roleActor: "",
-        roleName: ""
+        roleName: "",
+        actorName: "",
+        actorPlaceOfBirth: "",
+        actorDescription: "",
+        actorYearOfBirth: "",
+        actorHeightCM: "",
+        actorEdited: null
     },
     methods: {
         getActors(movieId)
@@ -24,7 +31,50 @@ var mainElement = new Vue({
         },
         addActor()
         {
+            if(this.actorName != "" && this.actorPlaceOfBirth != "" && this.actorDescription !="" && this.actorYearOfBirth != "" && this.actorHeightCM != "")
+            {
+                if(this.actorEdited != null)
+                {
+                    axios.put(actorsBaseUrl+ "/" + this.actorEdited.id, {
+                            name: this.actorName,
+                            placeOfBirth: this.actorPlaceOfBirth,
+                            description: this.actorDescription, 
+                            yearOfBirth: this.actorYearOfBirth,
+                            heightCM: this.actorHeightCM 
+                        })
+                        .then(response => {
+                            this.actorEdited = response.data
+                            this.actorEdited = null})
+                        .then(response => {
+                            axios.get(actorsBaseUrl)
+                                    .then(actorsResponse =>{
+                                        mainElement.actorsDatabase = actorsResponse.data;
+                                    })
+                                    .catch(error => console.log(error))     
 
+                        })
+                }
+                else
+                {
+                    let actor = {
+                        name: this.actorName,
+                        placeOfBirth: this.actorPlaceOfBirth,
+                        description: this.actorDescription, 
+                        yearOfBirth: this.actorYearOfBirth,
+                        heightCM: this.actorHeightCM 
+                    }
+                    axios.post(actorsBaseUrl, actor)
+                        .then(response => this.actorsDatabase.push(response.data))
+                    
+                }
+                
+            }
+            
+            this.actorName = "";
+            this.actorPlaceOfBirth = "";
+            this.actorDescription = "";
+            this.actorYearOfBirth = "";
+            this.actorHeightCM = "";
         },
         addMovie()
         {
@@ -32,7 +82,6 @@ var mainElement = new Vue({
             {
                 if(this.movieEdited != null)
                 {
-                    console.log(this.movieAvatar)
                     axios.put(moviesBaseUrl+ "/" + this.movieEdited.id, {
                             avatar : this.movieAvatar,
                             name: this.movieTitle,
@@ -51,9 +100,6 @@ var mainElement = new Vue({
                                     .catch(error => console.log(error))     
 
                         })
-                    
-                    console.log("here1")
-                    
                 }
                 else
                 {
@@ -102,7 +148,13 @@ var mainElement = new Vue({
         },
         deleteActor(actor)
         {
-            
+            axios.delete(actorsBaseUrl + "/" + actor.id)
+                .then(response => 
+                    {
+                        this.actorsDatabase.splice(
+                            this.movieDatabase.indexOf(actor), 1
+                        )
+                    })
         },
         deleteMovie(movie)
         {
@@ -118,9 +170,17 @@ var mainElement = new Vue({
         {
             
         },
-        editActor()
+        editActor(actor)
         {
-
+            if(this.actorEdited == null)
+            {
+                this.actorEdited = actor;
+                this.actorName = actor.name;
+                this.actorPlaceOfBirth = actor.placeOfBirth;
+                this.actorDescription = actor.description;
+                this.actorYearOfBirth = actor.yearOfBirth;
+                this.actorHeightCM = actor.heightCM;
+            }
         },
         editMovie(movie)
         {
@@ -144,18 +204,21 @@ var mainElement = new Vue({
         {
             
         },
-    },
-    watch: {
-        actorsOfTheMovie(movieId) {
-            return this.movieActorsDatabase.filter( function(movieActor){
+        movieActors() {
+            return movieId => this.movieActorsDatabase.filter( function(movieActor){
                 return movieActor.filmId == movieId
             })
+        },
+        actorsMovies() {
+            return actorId => this.actorsMoviesDatabase.filter(function(movieActor){
+                return movieActor.actorId == actorId
+            })
         }
-    },
-       
+    }, 
     components:
     {
         'movie': movieComponent,
+        'actor': actorComponent
     }
 })
 
@@ -165,6 +228,7 @@ var actorsBaseUrl = "http://localhost:3001/actors";
 var castBaseUrl = "http://localhost:3001/cast";
 var movieActorsURL = (id) => `http://localhost:3001/films/${id}/actors`;
 var moviesActorsAllURL = "http://localhost:3001/films/actors";
+var actorsMoviesAllURL = "http://localhost:3001/actors/films";
 var actorsMovieURL =  (id) => `http://localhost:3001/actors/${id}/films`;
 
 //loading a list of movies with actors
@@ -182,4 +246,8 @@ axios.get(moviesActorsAllURL)
 
 axios.get(actorsBaseUrl)
     .then(response => {mainElement.actorsDatabase = response.data})
+    .catch(error => console.log(error))
+
+axios.get(actorsMoviesAllURL)
+    .then(response => {mainElement.actorsMoviesDatabase = response.data})
     .catch(error => console.log(error))

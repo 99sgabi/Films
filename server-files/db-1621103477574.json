@@ -799,14 +799,6 @@
       "description": "Distinctio iusto et inventore sed labore esse ut cum iusto. Vel quo non nisi et tempore illo ut odio occaecati. Et eveniet omnis illo sed qui. Assumenda aut amet ut qui quos quam natus aliquam. Commodi ipsam veniam quia placeat qui.",
       "yearOfBirth": 1993,
       "heightCM": 206
-    },
-    {
-      "id": 100,
-      "name": "Valerie Kshlerin IV",
-      "placeOfBirth": "Huntington Beach",
-      "description": "Corrupti ipsa qui. Dolores sed numquam et officia nulla. Laudantium sit ut non suscipit doloribus ipsam dolor veniam.",
-      "yearOfBirth": 1941,
-      "heightCM": 178
     }
   ],
   "films": [
@@ -1873,12 +1865,6 @@
       "role": "Marta Koss"
     },
     {
-      "id": 42,
-      "filmId": 21,
-      "actorId": 100,
-      "role": "Cassandra Schiller PhD"
-    },
-    {
       "id": 43,
       "filmId": 22,
       "actorId": 29,
@@ -2281,12 +2267,6 @@
       "role": "Erick Swaniawski Jr."
     },
     {
-      "id": 110,
-      "filmId": 55,
-      "actorId": 100,
-      "role": "Hannah Breitenberg"
-    },
-    {
       "id": 111,
       "filmId": 56,
       "actorId": 61,
@@ -2327,12 +2307,6 @@
       "filmId": 59,
       "actorId": 67,
       "role": "Mr. Kristin Rowe"
-    },
-    {
-      "id": 118,
-      "filmId": 59,
-      "actorId": 100,
-      "role": "Cody Keebler"
     },
     {
       "id": 119,
@@ -2725,12 +2699,6 @@
       "role": "Miss Jeannette Morissette"
     },
     {
-      "id": 184,
-      "filmId": 92,
-      "actorId": 100,
-      "role": "Debbie Christiansen"
-    },
-    {
       "id": 185,
       "filmId": 93,
       "actorId": 71,
@@ -2855,6 +2823,12 @@
       "actorId": 11,
       "filmId": 0,
       "id": 205
+    },
+    {
+      "role": "ahahah",
+      "actorId": 19,
+      "filmId": 0,
+      "id": 206
     }
   ]
 }

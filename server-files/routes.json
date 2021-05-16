@@ -1,5 +1,6 @@
 {
     "/actors/:id/films*" : "/cast?_expand=film&actorId=:id",
     "/films/:id/actors*" : "/cast?_expand=actor&filmId=:id",
-    "/films/actors" : "/cast?_expand=actor"
+    "/films/actors" : "/cast?_expand=actor",
+    "/actors/films" : "/cast?_expand=film"
 }
