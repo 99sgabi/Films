@@ -74,3 +74,32 @@ let actorComponent =
                     </div>
                 </div>`
 }
+
+let roleComponent = {
+    props: ["role"],
+    template : `<div style="display: flex">
+                    <div style="float:left;width:90%">
+                        <div>
+                            <h1 style="color:blue">
+                                Role name: {{ role.role }}
+                            </h1>
+                            
+                        </div>
+                        <p>
+                            Actor: {{ role.actorId }}
+                        </p>
+                        <p>
+                            Movie: {{ role.filmId }}
+                        </p>
+                    </div>
+                    <div style="float:left;width:10%">
+                        <button v-on:click="$emit('edit', role)">
+                            Edytuj
+                        </button>
+                        <br/>
+                        <button v-on:click="$emit('delete', role)">
+                            Usuń
+                        </button>
+                    </div>
+                </div>`
+}

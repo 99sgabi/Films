@@ -88,10 +88,9 @@
                         Film:
                     </label>
                     <select v-model="roleFilm">
-                        <option v-for="movie in movieDatabase" :value="movie">{{ movie.name }}</option>
+                        <option v-for="movie in movieDatabase" v-bind:value="movie">{{ movie.name }}</option>
                     </select>   
                     <br/>
-                    
                     <br/>
                     <label>
                         Aktor:
@@ -108,13 +107,18 @@
         </div>
         
         <hr/>
-        <hr/><!--
+        <hr/>
         <h1>Movies:</h1>
         <movie v-for="movie in movieDatabase" :key="movie.id" :movie="movie" :cast="movieActors(movie.id)" 
             v-on:delete="deleteMovie" v-on:edit="editMovie" :movieEdited="movieEdited">
         </movie>
         <hr/>
-        <hr/>-->
+        <hr/>
+        <h1>Role:</h1>
+        <role v-for="role in movieActorsDatabase" :role="role" 
+            v-on:delete="deleteActorFromTheMovie" v-on:edit="editRoleOfTheActorInTheMovie" >
+        </role>
+
         <h1>Aktorzy:</h1>
         <actor v-for="actor in actorsDatabase" :key="actor.id" :actor="actor" :movies="actorsMovies(actor.id)" 
             v-on:delete="deleteActor" v-on:edit="editActor" >

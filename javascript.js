@@ -20,8 +20,7 @@ var mainElement = new Vue({
         actorYearOfBirth: "",
         actorHeightCM: "",
         actorEdited: null,
-        roleEdited: null,
-        roleName: ""
+        roleEdited: null
     },
     methods: {
         getActors(movieId)
@@ -128,42 +127,45 @@ var mainElement = new Vue({
         {
             if(this.roleName != "" && this.roleActor != "" && this.roleFilm !="")
             {
-                let cast = {
-                    role: this.roleName,
-                    actorId: this.roleActor.id,
-                    filmId: this.roleFilm.id
-                }
-                axios.post(castBaseUrl, cast)
-                    .then(response => {
-                        axios.get(moviesActorsAllURL)
-                        .then(response =>{
-                            mainElement.movieActorsDatabase = response.data;
-                        })
-                        .catch(error => console.log(error))     
-                })
-                .catch(error => console.log(error))
-            }
-            else
-            {
-                let role = {
-                    role: this.roleName,
-                    actorId: this.roleEdited.actorId,
-                    filmId: this.roleEdited.filmId
-                }
-                axios.put(castBaseUrl + "/" + roleEdited.id, role)
-                    .then(response => {
-                        axios.get(moviesActorsAllURL)
-                        .then(response =>{
-                            mainElement.movieActorsDatabase = response.data;
-                        })     
-                    })
-                    .then(response => {
-                        axios.get(actorsMoviesAllURL)
-                        .then(response =>{
-                            mainElement.actorsMoviesDatabase = response.data;
-                        })     
+                if(this.roleEdited == null)
+                {
+                    let cast = {
+                        role: this.roleName,
+                        actorId: this.roleActor.id,
+                        filmId: this.roleFilm.id
+                    }
+                    axios.post(castBaseUrl, cast)
+                        .then(response => {
+                            axios.get(moviesActorsAllURL)
+                            .then(response =>{
+                                mainElement.movieActorsDatabase = response.data;
+                            })
+                            .catch(error => console.log(error))     
                     })
                     .catch(error => console.log(error))
+                }
+                else
+                {
+                    let role = {
+                        role: this.roleName,
+                        actorId: this.roleActor.id,
+                        filmId: this.roleFilm.id
+                    }
+                    axios.put(castBaseUrl + "/" + this.roleEdited.id, role)
+                        .then(response => {
+                            axios.get(moviesActorsAllURL)
+                            .then(response =>{
+                                mainElement.movieActorsDatabase = response.data;
+                            })     
+                        })
+                        .then(response => {
+                            axios.get(actorsMoviesAllURL)
+                            .then(response =>{
+                                mainElement.actorsMoviesDatabase = response.data;
+                            })     
+                        })
+                        .catch(error => console.log(error))
+                }
             }
             this.roleName = ""
             this.roleActor = "" 
@@ -273,6 +275,12 @@ var mainElement = new Vue({
             {
                 this.roleEdited = role;
                 this.roleName = role.role;
+                this.roleActor = this.actorsDatabase.filter( function(actor){
+                    return actor.id == role.actorId
+                })[0]
+                this.roleFilm = this.movieDatabase.filter( function(movie){
+                    return movie.id == role.filmId
+                })[0]
             }
         }
     },
@@ -295,7 +303,8 @@ var mainElement = new Vue({
     components:
     {
         'movie': movieComponent,
-        'actor': actorComponent
+        'actor': actorComponent,
+        'role': roleComponent
     }
 })
 
