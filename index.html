@@ -109,7 +109,7 @@
         <hr/>
         <hr/>
         <h1>Movies:</h1>
-        <movie v-for="movie in movieDatabase" :key="movie.id" :movie="movie" :cast="movieActors(movie.id)" 
+        <movie v-for="movie in movieDatabase" :key="(movie.id + 1)*100000000" :movie="movie" :cast="movieActors(movie.id)" 
             v-on:delete="deleteMovie" v-on:edit="editMovie" :movieEdited="movieEdited">
         </movie>
         <hr/>
@@ -120,7 +120,7 @@
         </role>
 
         <h1>Aktorzy:</h1>
-        <actor v-for="actor in actorsDatabase" :key="actor.id" :actor="actor" :movies="actorsMovies(actor.id)" 
+        <actor v-for="actor in actorsDatabase" :key="(actor.id + 1)*100000000000" :actor="actor" :movies="actorsMovies(actor.id)" 
             v-on:delete="deleteActor" v-on:edit="editActor" >
         </actor>    
 

@@ -87,7 +87,7 @@ var mainElement = new Vue({
                             avatar : this.movieAvatar,
                             name: this.movieTitle,
                             description: this.movieDescription,
-                            dateOfRelease: this.movieDateOfRelease,
+                            dateOfRelease: new Date(Date.parse(this.movieDateOfRelease)),
                             genere : this.movieGenere
                         })
                         .then(response => {
@@ -108,7 +108,7 @@ var mainElement = new Vue({
                         avatar : this.movieAvatar,
                         name: this.movieTitle,
                         description: this.movieDescription,
-                        dateOfRelease: this.movieDateOfRelease,
+                        dateOfRelease: new Date(Date.parse(this.movieDateOfRelease)),
                         genere : this.movieGenere
                     }
                     axios.post(moviesBaseUrl, movie)
@@ -134,15 +134,32 @@ var mainElement = new Vue({
                         actorId: this.roleActor.id,
                         filmId: this.roleFilm.id
                     }
-                    axios.post(castBaseUrl, cast)
-                        .then(response => {
-                            axios.get(moviesActorsAllURL)
-                            .then(response =>{
-                                mainElement.movieActorsDatabase = response.data;
-                            })
-                            .catch(error => console.log(error))     
-                    })
-                    .catch(error => console.log(error))
+                    let found = false;
+                    console.log(this.movieActorsDatabase.length)
+                    for(let i = 0; i< this.movieActorsDatabase.length; i ++ )
+                    {
+                        if(this.movieActorsDatabase[i].actorId == this.roleActor.id && 
+                            this.movieActorsDatabase[i].filmId == this.roleFilm.id)
+                            {
+                                found = true;
+                                break;
+                            }
+                    }
+                    if(!found)
+                    {
+                        console.log(found)
+                        axios.post(castBaseUrl, cast)
+                            .then(response => {
+                                axios.get(moviesActorsAllURL)
+                                .then(response =>{
+                                    mainElement.movieActorsDatabase = response.data;
+                                })
+                                .catch(error => console.log(error))     
+                        })
+                        .catch(error => console.log(error))
+                    }
+                        
+                    
                 }
                 else
                 {
@@ -261,11 +278,15 @@ var mainElement = new Vue({
         {
             if(this.movieEdited == null)
             {
+                let dateOfRelease = new Date(Date.parse(movie.dateOfRelease));
+                let y = dateOfRelease.getFullYear();
+                let m = dateOfRelease.getMonth() < 10 ? "0" + dateOfRelease.getMonth() : dateOfRelease.getMonth();
+                let d = dateOfRelease.getDate() < 10 ? "0" + dateOfRelease.getDate() : dateOfRelease.getDate();
                 this.movieEdited = movie;
                 this.movieTitle = movie.name;
                 this.movieDescription = movie.description;
                 this.movieGenere = movie.genere;
-                this.movieDateOfRelease = movie.dateOfRelease;
+                this.movieDateOfRelease = `${y}-${m}-${d}`;
                 this.movieAvatar = movie.avatar;
             }
         },

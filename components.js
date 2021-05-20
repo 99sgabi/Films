@@ -20,7 +20,7 @@ let movieComponent =
                             Genere: {{ movie.genere }}
                         </p>
                         <ul>
-                            <li v-for="role in cast" v-bind:key="role.actorId">
+                            <li v-for="role in cast" v-bind:key="(role.actorId + 1)*1000000">
                             {{ role.actor && role.actor.name }}
                             </li>
                         </ul>
@@ -58,7 +58,7 @@ let actorComponent =
                             height: {{ actor.heightCM }}
                         </p>
                         <ul>
-                            <li v-for="movie in movies" v-bind:key="movie.filmId">
+                            <li v-for="movie in movies" v-bind:key="(movie.filmId + 1)*1000">
                             {{ movie.film && movie.film.name }}
                             </li>
                         </ul>
