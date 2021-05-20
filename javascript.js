@@ -1,5 +1,26 @@
+Vue.use(VueRouter);
+const routes =[
+    { 
+        path: '/movies', 
+        component: moviesList, 
+        props: (route) => ({
+            movies: mainElement.movieDatabase
+        })
+    },
+    { 
+        path: '/actors', 
+        component: actorsList, 
+        props: (route) => ({
+            actors: mainElement.actorsDatabase
+        })
+    }
+];
+const router = new VueRouter({ routes});
+
+
 var mainElement = new Vue({
     el: "#app",
+    router,
     data: { 
         movieDatabase: [],
         movieActorsDatabase: [],

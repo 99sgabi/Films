@@ -103,3 +103,104 @@ let roleComponent = {
                     </div>
                 </div>`
 }
+
+let movieBasicComponent = {
+    props: ['movie'],
+    template: `
+    <div>
+        <div style="width: 20%;float:left">
+            <img style="width:100%" :src="movie.avatar"/>
+        </div>
+        <div style="float:left;width:70%">
+            <div>
+                <h1 style="color:blue">
+                    Movie name: {{ movie.name }}
+                </h1>
+                            
+            </div>
+            <p>
+                Date: {{ movie.dateOfRelease }}
+            </p>
+            <p>
+                Genere: {{ movie.genere }}
+            </p>
+            <p>
+                Description: {{ movie.description }}
+            </p>
+        </div>
+        <div style="float:left;width:10%">
+            <button>
+                Szczegoly
+            </button>
+        </div>
+    </div>`
+}
+
+let moviesList = 
+{
+    props : ['movies'],
+    template: `
+    <div>
+    <h1>Filmy:</h1>
+            <div v-for="movie in movies">
+               <movie :movie="movie"></movie>
+            </div>
+    </div>
+    `,
+    components:
+    {
+        'movie': movieBasicComponent,
+    }
+}
+
+let actorBasicComponent = {
+    props: ['actor'],
+    template: `
+    <div>
+        <div style="float:left;width:90%">
+            <div>
+                <h1 style="color:blue">
+                    Movie name: {{ actor.name }}
+                </h1>
+                            
+            </div>
+                <p>
+                    Description: {{ actor.description }}
+                </p>
+                <p>
+                    Place Of Birth: {{ actor.placeOfBirth }}
+                </p>
+                <p>
+                    height: {{ actor.heightCM }}
+                </p>
+                <p>
+                    yearOfBirth: {{ actor.yearOfBirth }}
+                </p> 
+        </div>
+        <div style="float:left;width:10%">
+            <button>
+                Szczegoly
+            </button>
+        </div>
+    </div>`
+}
+
+
+let actorsList = 
+{
+    props : ['actors'],
+    template: `
+    <div>
+    <h1>Aktorzy:</h1>
+        <div>
+            <div v-for="actor in actors">
+                <actor :actor="actor"></actor> 
+            </div>
+        </div>
+    </div>
+    `,
+    components:
+    {
+        'actor': actorBasicComponent,
+    }
+}
