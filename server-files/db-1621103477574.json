@@ -1685,12 +1685,6 @@
       "role": "Kelvin Nicolas"
     },
     {
-      "id": 4,
-      "filmId": 2,
-      "actorId": 0,
-      "role": "Eddie Haley"
-    },
-    {
       "id": 5,
       "filmId": 3,
       "actorId": 19,
@@ -2877,6 +2871,35 @@
       "actorId": 19,
       "filmId": 0,
       "id": 206
+    },
+    {
+      "filmId": 4,
+      "actor": {},
+      "role": "asd",
+      "film": {
+        "id": 4,
+        "name": "magni",
+        "avatar": "http://placeimg.com/640/480/people",
+        "description": "Alias ducimus voluptas odit. Nihil non non rerum quas perferendis sed in quia.",
+        "dateOfRelease": "2020-12-13T18:33:49.997Z",
+        "genere": "dramat"
+      },
+      "id": 207
+    },
+    {
+      "filmId": 3,
+      "actorId": 0,
+      "actor": {},
+      "role": "sdf",
+      "film": {
+        "id": 3,
+        "name": "quia",
+        "avatar": "http://placeimg.com/640/480/animals",
+        "description": "Quae qui voluptatibus maxime maiores adipisci quia. Rerum minima dolor. Minima velit corrupti. Repudiandae laudantium est expedita natus officiis sed vitae. Blanditiis aliquam laudantium quo nulla est et.",
+        "dateOfRelease": "2020-06-27T21:03:16.636Z",
+        "genere": "romans"
+      },
+      "id": 208
     }
   ]
 }

@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
     
+    <link rel = "stylesheet" href="site.css">
     <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
-    <div id="app">
+
+    <div name="1" class="grid" id="app">
         <!--
         <div style="display:flex">
             <div style="float:left;width:33%">
@@ -126,10 +128,9 @@
             v-on:delete="deleteActor" v-on:edit="editActor" >
         </actor>    -->
 
-        <hr/>
-        <div>
-            <router-link to="/movies">filmy</router-link>
-            <router-link to="/actors">aktorzy</router-link>
+        <div name="2">
+            <router-link to="/movies" class="button" style="position: fixed;">filmy</router-link>
+            <router-link to="/actors" class="button" style="position: fixed; margin-left: 100px;">aktorzy</router-link>
             <router-view></router-view>
         </div>
     </div>

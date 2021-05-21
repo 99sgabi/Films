@@ -94,31 +94,33 @@ let movieComponent =
         'formE': movieForm,
         'formCast': actorToMovieForm
     },
-    template : `<div><div style="display: flex">
-                    <div style="width: 20%;float:left">
-                            <img style="width:100%" :src="movie.avatar"/>
-                    </div>
-                    <div style="float:left;width:70%">
-                        <div>
-                            <h1 style="color:blue">
-                                Movie name: {{ movie.name }}
-                            </h1>
-                            
+    template : `<div style="top: 30px;">
+                    <div class="movie-details">
+                        <div style="margin:50px">
+                            <img :src="movie.avatar"/>
                         </div>
-                        <p>
-                            Date: {{ movie.dateOfRelease }}
-                        </p>
-                        <p>
-                            Genere: {{ movie.genere }}
-                        </p>
-                        <ul>
-                            <li v-for="role in cast" v-bind:key="(role.actorId + 1)*1000000">
-                            {{ role.actor && role.actor.name }}
-                            <button v-on:click="deleteActor(role)"> 
-                                Usuń aktora
-                            </button>
-                            </li>
-                        </ul>
+                        <div style="float:left;width:70%">
+                            <div>
+                                <h1 style="color:blue">
+                                    Movie name: {{ movie.name }}
+                                </h1>
+                                
+                            </div>
+                            <p>
+                                Date: {{ movie.dateOfRelease }}
+                            </p>
+                            <p>
+                                Genere: {{ movie.genere }}
+                            </p>
+                            <ul>
+                                <li v-for="role in cast" v-bind:key="(role.actorId + 1)*1000000">
+                                {{ role.actor && role.actor.name }}
+                                <button v-on:click="deleteActor(role)"> 
+                                    Usuń aktora
+                                </button>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                     <div style="float:left;width:10%">
                         <button v-on:click="$emit('editmovieevent', movie)">
@@ -224,8 +226,8 @@ let actorComponent =
         'formCast': movieToActorForm,
     },
     template : `<div>
-                <div style="display: flex;width=100%">
-                    <div style="float:left;width:90%">
+                <div class="actor-components-List">
+                    <div style="margin:10px;">
                         <div>
                             <h1 style="color:blue">
                                 Actor name: {{ actor.name }}
@@ -250,7 +252,7 @@ let actorComponent =
                             </li>
                         </ul>
                     </div>
-                    <div style="float:left;width:10%">
+                    <div style="margin:10px;">
                         <button v-on:click="$emit('editActorEvent', actor)">
                             Edytuj
                         </button>
@@ -272,11 +274,11 @@ let actorComponent =
 let movieBasicComponent = {
     props: ['movie'],
     template: `
-    <div style="display: flex">
-        <div style="width: 20%;float:left">
-            <img style="width:100%" :src="movie.avatar"/>
+    <div class="movie-components-List">
+        <div style="margin:5px;">
+            <img :src="movie.avatar"/>
         </div>
-        <div style="float:left;width:70%">
+        <div style="margin: 5px;">
             <div>
                 <h1 style="color:blue">
                     Movie name: {{ movie.name }}
@@ -293,10 +295,8 @@ let movieBasicComponent = {
                 Description: {{ movie.description }}
             </p>
         </div>
-        <div style="float:left;width:10%">
-            <button>
-            <router-link :to="{ name: 'movie', params: { id: movie.id }}">Szczegoly</router-link>
-            </button>
+        <div style="position: relative">
+            <router-link class="list-button" :to="{ name: 'movie', params: { id: movie.id }}">Szczegoly</router-link>
         </div>
     </div>`
 }
@@ -307,14 +307,13 @@ let movieBasicComponent = {
 let moviesList = 
 {
     template: `
-    <div>
-    <div>
-    <formE :movie="movie" :title="title" v-on:editmovieevent="addMovie"> </formE>
-    </div>
-    <h1>Filmy:</h1>
-            <div v-for="movie in movies">
-               <movie :movie="movie"></movie>
-            </div>
+    <div >
+        <div>
+            <formE :movie="movie" :title="title" v-on:editmovieevent="addMovie"> </formE>
+        </div>
+        <div v-for="movie in movies">
+                <movie :movie="movie"></movie>
+        </div>
     </div>
     `,
     data(){
@@ -366,8 +365,8 @@ let moviesList =
 let actorBasicComponent = {
     props: ['actor'],
     template: `
-    <div style="display: flex">
-        <div style="float:left;width:90%">
+    <div class="actor-components-List">
+        <div style="margin:10px;">
             <div>
                 <h1 style="color:blue">
                     Movie name: {{ actor.name }}
@@ -387,10 +386,8 @@ let actorBasicComponent = {
                     yearOfBirth: {{ actor.yearOfBirth }}
                 </p> 
         </div>
-        <div style="float:left;width:10%">
-            <button>
-                <router-link :to="{ name: 'actor', params: { id: actor.id }}">Szczegoly</router-link>
-            </button>
+        <div style="margin:10px; position: relative">
+            <router-link class="list-button" :to="{ name: 'actor', params: { id: actor.id }}">Szczegoly</router-link>
         </div>
     </div>`
 }
@@ -440,7 +437,6 @@ let actorsList =
             <formA :actor=actor :title="title" v-on:editactorevent="addActor">
             </formA>
         </div>
-    <h1>Aktorzy:</h1>
         <div>
             <div v-for="actor in actors">
                 <actor :actor="actor"></actor> 

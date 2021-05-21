@@ -27,8 +27,8 @@ let movieForm = {
         }
     },
     template: `
-        <div style="width:100%">
-        <hr/>
+        <div class="form">
+        <h1>Filmy:</h1>
         <h1>{{ title }}:</h1>
 
         <form v-on:submit.prevent="edit">
@@ -65,7 +65,7 @@ let movieForm = {
             </label><br/>
             <input type="url" v-model="movie.avatar">
             <br/>
-            <input type="submit" value="Wyślij">
+            <input type="submit" class="button" value="Wyślij">
         </form>
     </div>
     `
@@ -81,7 +81,8 @@ let actorForm = {
         }
     },
     template: `
-    <div>
+    <div class="form">
+        
         <h1>{{title}}</h1>
         <form v-on:submit.prevent="edit">
             <label>
@@ -112,7 +113,7 @@ let actorForm = {
             <br/>
             <input type="number" v-model="actor.heightCM">
             <br/>
-            <input type="submit" value="Wyślij">
+            <input type="submit" class="button" value="Wyślij">
         </form>
     </div>
     `
@@ -158,7 +159,7 @@ let actorToMovieForm = {
         }
     },
     template: `
-            <div style="display:flex">
+            <div class="form">
                 <h1>Dodaj aktora:</h1>
                 <form v-on:submit.prevent="addActor">
                     <label>
@@ -220,7 +221,7 @@ let movieToActorForm = {
         }
     },
     template: `
-            <div style="float:left;width:33%">
+            <div class="role-form">
                 <h1>Dodaj role:</h1>
                 <form v-on:submit.prevent="addMovie">
                     <label>

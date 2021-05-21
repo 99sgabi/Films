@@ -1,0 +1,91 @@
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    margin-left: 200px;
+    margin-right: 200px;
+
+}
+.list-button{
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translateX(-50%);
+
+    background-color: skyblue;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+.button{
+    background-color: skyblue;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+button{
+    background-color: skyblue;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+img{
+    width:100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.form{
+    position:fixed;
+    z-index:1000;
+    top: 100px;
+    margin-left: 0px;
+}
+.role-form{
+    position:fixed;
+    z-index:1000;
+    height:30px;
+    width:60px;
+    top: 550px;
+    margin-left: 0px;
+}
+.actor-components-List{
+    display: grid;
+    border-style: solid;
+    border-radius: 10px;
+    border-width: 3px;
+    grid-template-columns: 70% 30%;
+    margin-left:400px;
+}
+.movie-details{
+    display: grid;
+    border-style: solid;
+    border-radius: 10px;
+    border-width: 3px;
+    grid-template-columns: 70% 30%;
+    top: 200px;
+}
+.movie-components-List{
+    display: grid;
+    border-style: solid;
+    border-radius: 10px;
+    border-width: 3px;
+    grid-template-columns: 30% 40% 30%;
+    margin-left:400px;
+}
