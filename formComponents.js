@@ -1,3 +1,6 @@
+var actorsUrl = "http://localhost:3001/actors";
+var moviesUrl = "http://localhost:3001/films";
+
 let movieForm = {
     props: ['title', 'movie'],
     methods: {
@@ -114,3 +117,127 @@ let actorForm = {
     </div>
     `
 }
+
+
+let actorToMovieForm = {
+    props: ["movieId"],
+    data() {
+        return {
+            actors: {},
+            role: {
+                filmId: -1,
+                actorId: -1,
+                actor: {},
+                role: ""
+            }
+        }
+    },
+    created() {
+        this.fetchData();
+    },
+    methods: {
+        fetchData()
+        {
+            axios.get(actorsUrl)
+                .then(response =>{
+                    this.actors = response.data;
+                    this.role.filmId = this.$props.movieId;
+                })
+                .catch(error => console.log(error));
+        },
+        addActor()
+        {
+            this.role.actorId = this.role.actor.id
+            this.$emit('addrole', this.role)
+            this.role =  {
+                filmId: -1,
+                actorId: -1,
+                actor: {},
+                role: ""
+            }
+        }
+    },
+    template: `
+            <div style="display:flex">
+                <h1>Dodaj aktora:</h1>
+                <form v-on:submit.prevent="addActor">
+                    <label>
+                        Rola:
+                    </label><br/>
+                    <input v-model="role.role">
+                    <br/>
+                    <label>
+                        Aktor:
+                    </label>
+                    <select v-model="role.actor">
+                        <option v-for="actor in actors" :value="actor">{{ actor.name }}</option>
+                    </select>   
+                    <br/>
+                    
+                    <br/>
+                    <input type="submit" value="Wyślij">
+                </form>
+            </div>`
+};
+
+
+let movieToActorForm = {
+    props: ["actorId"],
+    data() {
+        return {
+            movies: {},
+            role: {
+                filmId: -1,
+                actorId: -1,
+                actor: {},
+                role: ""
+            }
+        }
+    },
+    created() {
+        this.fetchData();
+    },
+    methods: {
+        fetchData()
+        {
+            axios.get(moviesUrl)
+                .then(response =>{
+                    this.movies = response.data;
+                    this.role.actorId = this.$props.actorId;
+                })
+                .catch(error => console.log(error));
+        },
+        addMovie()
+        {
+            this.role.filmId = this.role.film.id
+            this.$emit('addrole', this.role)
+            this.role =  {
+                filmId: -1,
+                actorId: -1,
+                actor: {},
+                role: ""
+            }
+        }
+    },
+    template: `
+            <div style="float:left;width:33%">
+                <h1>Dodaj role:</h1>
+                <form v-on:submit.prevent="addMovie">
+                    <label>
+                        Rola:
+                    </label><br/>
+                    <input v-model="role.role">
+                    <br/>
+                    <label>
+                        Film:
+                    </label>
+                    <select v-model="role.film">
+                        <option v-for="movie in movies" v-bind:value="movie">{{ movie.name }}</option>
+                    </select>   
+                    <br/>
+                    
+                    <br/>
+                    <input type="submit" value="Wyślij">
+                </form>
+            </div>`
+};

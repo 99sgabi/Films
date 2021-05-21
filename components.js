@@ -55,7 +55,6 @@ let movieComponent =
         },
         editMovie(movie)
         {   
-            console.log(movie)
             axios.put(moviesBaseUrl+ "/" + movie.id, {
                 avatar : movie.avatar,
                 name: movie.name,
@@ -65,10 +64,35 @@ let movieComponent =
             })
             .then(response => {
                 this.movie = response.data })
+        },
+        addActorToMovie(role)
+        {
+            if(role.role != "" && role.actorId != -1)
+            {
+                let found = false;
+                for(let i = 0; i< this.cast.length; i ++ )
+                {
+                    if(this.cast[i].actorId == role.actorId)
+                    {
+                        found = true;
+                        break;
+                    }
+                }
+                if(!found)
+                {
+                    axios.post(castBaseUrl, role)
+                        .then(response => {
+                            console.log(response.data)
+                            this.cast.push(response.data)
+                        })
+                        .catch(error => console.log(error))
+                }
+            }
         }
     },
     components: {
         'formE': movieForm,
+        'formCast': actorToMovieForm
     },
     template : `<div><div style="display: flex">
                     <div style="width: 20%;float:left">
@@ -108,6 +132,7 @@ let movieComponent =
                     
                 </div>
                 <formE :movie="movie" :title="title" v-on:editmovieevent="editMovie"> </formE>
+                <formCast :movieId="movie.id" v-on:addrole="addActorToMovie"></formCast>
                 </div>`
 }//)
 
@@ -168,10 +193,35 @@ let actorComponent =
             })
             .then(response => {
                 this.actor = response.data })
+        },
+        addMovieToActor(role)
+        {
+            if(role.role != "" && role.filmId != -1)
+            {
+                let found = false;
+                for(let i = 0; i< this.movies.length; i ++ )
+                {
+                    if(this.movies[i].filmId == role.filmId)
+                    {
+                        found = true;
+                        break;
+                    }
+                }
+                if(!found)
+                {
+                    axios.post(castBaseUrl, role)
+                        .then(response => {
+                            console.log(response.data)
+                            this.movies.push(response.data)
+                        })
+                        .catch(error => console.log(error))
+                }
+            }
         }
     },
     components: {
         'formA': actorForm,
+        'formCast': movieToActorForm,
     },
     template : `<div>
                 <div style="display: flex;width=100%">
@@ -212,6 +262,7 @@ let actorComponent =
                  </div>
                     
                 <formA :actor="actor" :title="title" v-on:editactorevent="editActor"> </formA>
+                <formCast :actorId="actor.id" v-on:addrole="addMovieToActor"></formCast>
                 </div>`
 }
 

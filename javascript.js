@@ -392,6 +392,3 @@ axios.get(actorsBaseUrl)
     .then(response => {mainElement.actorsDatabase = response.data})
     .catch(error => console.log(error))
 
-axios.get(actorsMoviesAllURL)
-    .then(response => {mainElement.actorsMoviesDatabase = response.data})
-    .catch(error => console.log(error))
