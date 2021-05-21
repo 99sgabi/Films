@@ -8,6 +8,18 @@ const routes =[
         })
     },
     { 
+        path: '/movies/:id', 
+        component: movieComponent, 
+        props: true,
+        name: 'movie'
+    },
+    { 
+        path: '/actors/:id', 
+        component: actorComponent, 
+        props: true,
+        name: 'actor'
+    },
+    { 
         path: '/actors', 
         component: actorsList, 
         props: (route) => ({
@@ -330,6 +342,11 @@ var mainElement = new Vue({
         filteredMovies(nameCriteria, dateCriteria, actorsCriteria, genereCriteria)
         {
             
+        },
+        movie() {
+            return movieId => this.movieActorsDatabase.filter( function(movieActor){
+                return movieDatabase.filmId == movieId
+            })
         },
         movieActors() {
             return movieId => this.movieActorsDatabase.filter( function(movieActor){

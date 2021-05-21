@@ -1,7 +1,41 @@
 //Vue.component('movie', 
+var baseUrl = "http://localhost:3001";
+var moviesBaseUrl = "http://localhost:3001/films";
+var actorsBaseUrl = "http://localhost:3001/actors";
+var castBaseUrl = "http://localhost:3001/cast";
+var movieActorsURL = (id) => `http://localhost:3001/films/${id}/actors`;
+var moviesActorsAllURL = "http://localhost:3001/films/actors";
+var actorsMoviesAllURL = "http://localhost:3001/actors/films";
+var actorsMovieURL =  (id) => `http://localhost:3001/actors/${id}/films`;
+
+
 let movieComponent = 
 {
-    props: ["movie", "cast"],
+    data() {
+        return {
+            movie: "",    
+            cast: ""  
+        }
+    },
+    created() {
+        this.fetchData();
+    },
+    methods: {
+        fetchData()
+        {
+            let id =  this.$route.params.id;
+            axios.get(moviesBaseUrl + "/" + id)
+                .then(moviesResponse =>{
+                    this.movie = moviesResponse.data;
+                })
+                .catch(error => console.log(error));
+            axios.get(movieActorsURL(id))
+                .then(moviesResponse =>{
+                    this.cast = moviesResponse.data;
+                })
+                .catch(error => console.log(error))
+        }
+    },
     template : `<div style="display: flex">
                     <div style="width: 20%;float:left">
                             <img style="width:100%" :src="movie.avatar"/>
@@ -39,7 +73,31 @@ let movieComponent =
 
 let actorComponent = 
 {
-    props: ["actor", "movies"],
+    data() {
+        return {
+            actor: "",    
+            movies: ""  
+        }
+    },
+    created() {
+        this.fetchData();
+    },
+    methods: {
+        fetchData()
+        {
+            let id =  this.$route.params.id;
+            axios.get(actorsBaseUrl + "/" + id)
+                .then(actorsResponse =>{
+                    this.actor = actorsResponse.data;
+                })
+                .catch(error => console.log(error));
+            axios.get(actorsMovieURL(id))
+                .then(actorsResponse =>{
+                    this.movies = actorsResponse.data;
+                })
+                .catch(error => console.log(error))
+        }
+    },
     template : `<div style="display: flex">
                     <div style="float:left;width:90%">
                         <div>
@@ -107,7 +165,7 @@ let roleComponent = {
 let movieBasicComponent = {
     props: ['movie'],
     template: `
-    <div>
+    <div style="display: flex">
         <div style="width: 20%;float:left">
             <img style="width:100%" :src="movie.avatar"/>
         </div>
@@ -130,7 +188,7 @@ let movieBasicComponent = {
         </div>
         <div style="float:left;width:10%">
             <button>
-                Szczegoly
+            <router-link :to="{ name: 'movie', params: { id: movie.id }}">Szczegoly</router-link>
             </button>
         </div>
     </div>`
@@ -156,7 +214,7 @@ let moviesList =
 let actorBasicComponent = {
     props: ['actor'],
     template: `
-    <div>
+    <div style="display: flex">
         <div style="float:left;width:90%">
             <div>
                 <h1 style="color:blue">
@@ -179,7 +237,7 @@ let actorBasicComponent = {
         </div>
         <div style="float:left;width:10%">
             <button>
-                Szczegoly
+                <router-link :to="{ name: 'actor', params: { id: actor.id }}">Szczegoly</router-link>
             </button>
         </div>
     </div>`
