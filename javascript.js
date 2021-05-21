@@ -2,10 +2,8 @@ Vue.use(VueRouter);
 const routes =[
     { 
         path: '/movies', 
-        component: moviesList, 
-        props: (route) => ({
-            movies: mainElement.movieDatabase
-        })
+        component: moviesList,
+        name: 'moviesList'
     },
     { 
         path: '/movies/:id', 
@@ -24,7 +22,8 @@ const routes =[
         component: actorsList, 
         props: (route) => ({
             actors: mainElement.actorsDatabase
-        })
+        }),
+        name: 'actorsList'
     }
 ];
 const router = new VueRouter({ routes});
@@ -99,7 +98,7 @@ var mainElement = new Vue({
                     }
                     axios.post(actorsBaseUrl, actor)
                         .then(response => this.actorsDatabase.push(response.data))
-                    
+                    this.$router.push({name: "actorsList"});
                 }
                 
             }

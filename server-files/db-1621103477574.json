@@ -799,6 +799,30 @@
       "description": "Distinctio iusto et inventore sed labore esse ut cum iusto. Vel quo non nisi et tempore illo ut odio occaecati. Et eveniet omnis illo sed qui. Assumenda aut amet ut qui quos quam natus aliquam. Commodi ipsam veniam quia placeat qui.",
       "yearOfBirth": 1993,
       "heightCM": 206
+    },
+    {
+      "name": "aktor123",
+      "placeOfBirth": "tutaj",
+      "description": "opis tutaj",
+      "yearOfBirth": 1990,
+      "heightCM": "300",
+      "id": 100
+    },
+    {
+      "name": "aktor54321",
+      "placeOfBirth": "bystok",
+      "description": "oooooooo",
+      "yearOfBirth": "2021",
+      "heightCM": "3999",
+      "id": 101
+    },
+    {
+      "name": "andrzej",
+      "placeOfBirth": "123",
+      "description": "123",
+      "yearOfBirth": 1990,
+      "heightCM": 150,
+      "id": 102
     }
   ],
   "films": [
@@ -1609,6 +1633,30 @@
       "description": "Corporis perferendis assumenda dolores necessitatibus autem libero maiores enim. Ea quasi nostrum delectus unde consectetur tempora voluptas aut. Dolorum ex impedit cumque iste dicta voluptas ipsam. Eligendi quia non provident. Eveniet ipsam mollitia magni accusantium eum ipsam culpa consequatur non. Nihil dolorum autem animi quia similique sit.",
       "dateOfRelease": "2021-04-12T03:21:48.613Z",
       "genere": "romans"
+    },
+    {
+      "avatar": "https://wi.pb.edu.pl/wp-content/uploads/2018/03/WI_50px_black.png",
+      "name": "nowyfilm12",
+      "description": "tutaj 16:40",
+      "dateOfRelease": "2021-05-12T00:00:00.000Z",
+      "genere": "komedia",
+      "id": 101
+    },
+    {
+      "avatar": "https://wi.pb.edu.pl/wp-content/uploads/2018/03/WI_50px_black.png",
+      "name": "nowyfilm1223",
+      "description": "tutaj 16:403",
+      "dateOfRelease": "2022-04-16T00:00:00.000Z",
+      "genere": "komedia",
+      "id": 102
+    },
+    {
+      "avatar": "",
+      "name": "123",
+      "description": "123",
+      "dateOfRelease": "2021-05-06T00:00:00.000Z",
+      "genere": "romans",
+      "id": 103
     }
   ],
   "cast": [

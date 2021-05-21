@@ -1,4 +1,4 @@
-//Vue.component('movie', 
+//-------------------------------------------------------------------------------------------------------------------->Linki
 var baseUrl = "http://localhost:3001";
 var moviesBaseUrl = "http://localhost:3001/films";
 var actorsBaseUrl = "http://localhost:3001/actors";
@@ -8,13 +8,16 @@ var moviesActorsAllURL = "http://localhost:3001/films/actors";
 var actorsMoviesAllURL = "http://localhost:3001/actors/films";
 var actorsMovieURL =  (id) => `http://localhost:3001/actors/${id}/films`;
 
-
+//-------------------------------------------------------------------------------------------------------------------> Szczegoly Filmu
+//-------------------------------------------------------------------------------------------------------------------> Szczegoly Filmu
 let movieComponent = 
 {
     data() {
         return {
             movie: "",    
-            cast: ""  
+            cast: "",
+            title: "Edytuj",
+            movieDate: ""  
         }
     },
     created() {
@@ -34,9 +37,40 @@ let movieComponent =
                     this.cast = moviesResponse.data;
                 })
                 .catch(error => console.log(error))
+        },
+        deleteMovie(movie)
+        {
+            axios.delete(moviesBaseUrl + "/" + movie.id)
+                .then(response => { })
+            this.$router.push({name: "moviesList"});
+        },
+        deleteActor(role)
+        {
+            axios.delete(castBaseUrl + "/" + role.id)
+                .then(response => {
+                    this.cast.splice(
+                        this.cast.indexOf(role), 1
+                    )
+                })
+        },
+        editMovie(movie)
+        {   
+            console.log(movie)
+            axios.put(moviesBaseUrl+ "/" + movie.id, {
+                avatar : movie.avatar,
+                name: movie.name,
+                description: movie.description,
+                dateOfRelease: movie.dateOfRelease,
+                genere : movie.genere
+            })
+            .then(response => {
+                this.movie = response.data })
         }
     },
-    template : `<div style="display: flex">
+    components: {
+        'formE': movieForm,
+    },
+    template : `<div><div style="display: flex">
                     <div style="width: 20%;float:left">
                             <img style="width:100%" :src="movie.avatar"/>
                     </div>
@@ -56,27 +90,38 @@ let movieComponent =
                         <ul>
                             <li v-for="role in cast" v-bind:key="(role.actorId + 1)*1000000">
                             {{ role.actor && role.actor.name }}
+                            <button v-on:click="deleteActor(role)"> 
+                                Usuń aktora
+                            </button>
                             </li>
                         </ul>
                     </div>
                     <div style="float:left;width:10%">
-                        <button v-on:click="$emit('edit', movie)">
+                        <button v-on:click="$emit('editmovieevent', movie)">
                             Edytuj
                         </button>
                         <br/>
-                        <button v-on:click="$emit('delete', movie)">
+                        <button v-on:click="deleteMovie(movie)">
                             Usuń
                         </button>
                     </div>
+                    
+                </div>
+                <formE :movie="movie" :title="title" v-on:editmovieevent="editMovie"> </formE>
                 </div>`
 }//)
 
+
+
+//---------------------------------------------------------------------------------------------------------------> Szczegoly Aktorow
+//---------------------------------------------------------------------------------------------------------------> Szczegoly Aktorow
 let actorComponent = 
 {
     data() {
         return {
             actor: "",    
-            movies: ""  
+            movies: "",
+            title: "Edytuj"  
         }
     },
     created() {
@@ -96,9 +141,40 @@ let actorComponent =
                     this.movies = actorsResponse.data;
                 })
                 .catch(error => console.log(error))
+        },
+        deleteActor(actor)
+        {
+            axios.delete(actorsBaseUrl + "/" + actor.id)
+                .then(response => {})
+            this.$router.push({name: "actorsList"});
+        },
+        deleteMovie(role)
+        {
+            axios.delete(castBaseUrl + "/" + role.id)
+                .then(response => {
+                    this.movies.splice(
+                        this.movies.indexOf(role), 1
+                    )
+                })
+        },
+        editActor(actorE)
+        {
+            axios.put(actorsBaseUrl+ "/" + this.actor.id, {
+                name: actorE.name,
+                placeOfBirth: actorE.placeOfBirth,
+                description: actorE.description, 
+                yearOfBirth: actorE.yearOfBirth,
+                heightCM: actorE.heightCM 
+            })
+            .then(response => {
+                this.actor = response.data })
         }
     },
-    template : `<div style="display: flex">
+    components: {
+        'formA': actorForm,
+    },
+    template : `<div>
+                <div style="display: flex;width=100%">
                     <div style="float:left;width:90%">
                         <div>
                             <h1 style="color:blue">
@@ -118,50 +194,30 @@ let actorComponent =
                         <ul>
                             <li v-for="movie in movies" v-bind:key="(movie.filmId + 1)*1000">
                             {{ movie.film && movie.film.name }}
+                            <button v-on:click="deleteMovie(movie)"> 
+                                Usuń film
+                            </button>
                             </li>
                         </ul>
                     </div>
                     <div style="float:left;width:10%">
-                        <button v-on:click="$emit('edit', actor)">
+                        <button v-on:click="$emit('editActorEvent', actor)">
                             Edytuj
                         </button>
                         <br/>
-                        <button v-on:click="$emit('delete', actor)">
+                        <button v-on:click="deleteActor(actor)">
                             Usuń
                         </button>
                     </div>
+                 </div>
+                    
+                <formA :actor="actor" :title="title" v-on:editactorevent="editActor"> </formA>
                 </div>`
 }
 
-let roleComponent = {
-    props: ["role"],
-    template : `<div style="display: flex">
-                    <div style="float:left;width:90%">
-                        <div>
-                            <h1 style="color:blue">
-                                Role name: {{ role.role }}
-                            </h1>
-                            
-                        </div>
-                        <p>
-                            Actor: {{ role.actorId }}
-                        </p>
-                        <p>
-                            Movie: {{ role.filmId }}
-                        </p>
-                    </div>
-                    <div style="float:left;width:10%">
-                        <button v-on:click="$emit('edit', role)">
-                            Edytuj
-                        </button>
-                        <br/>
-                        <button v-on:click="$emit('delete', role)">
-                            Usuń
-                        </button>
-                    </div>
-                </div>`
-}
 
+//--------------------------------------------------------------------------------------------------------------> Element Listy Filmów
+//--------------------------------------------------------------------------------------------------------------> Element Listy Filmów
 let movieBasicComponent = {
     props: ['movie'],
     template: `
@@ -194,23 +250,68 @@ let movieBasicComponent = {
     </div>`
 }
 
+
+//-------------------------------------------------------------------------------------------------------------------> Lista Filmow
+//-------------------------------------------------------------------------------------------------------------------> Lista Filmow
 let moviesList = 
 {
-    props : ['movies'],
     template: `
     <div>
+    <div>
+    <formE :movie="movie" :title="title" v-on:editmovieevent="addMovie"> </formE>
+    </div>
     <h1>Filmy:</h1>
             <div v-for="movie in movies">
                <movie :movie="movie"></movie>
             </div>
     </div>
     `,
+    data(){
+        return {
+            movies: "",
+            title: "Dodaj Film",
+            movie: {                
+                avatar : "",
+                name: "",
+                description: "",
+                dateOfRelease: Date.now(),
+                genere : ""
+            }
+        }
+        
+    },
+    created() {
+        this.fetchData();
+    },
+    methods: {
+        fetchData()
+        {
+            axios.get(moviesBaseUrl)
+                .then(moviesResponse =>{
+                    this.movies = moviesResponse.data;
+                })
+                .catch(error => console.log(error));
+        },
+        addMovie(movie)
+        {
+            if(movie.name != "" && movie.description != "" && movie.genere !="" && movie.dateOfRelease != "")
+            {
+                axios.post(moviesBaseUrl, movie)
+                    .then(response => this.movies.push(response.data))
+            }
+            movie = this.movie;
+        }
+    },
     components:
     {
         'movie': movieBasicComponent,
+        'formE': movieForm
     }
 }
 
+
+//---------------------------------------------------------------------------------------------------------------> Element Listy Akorów
+//---------------------------------------------------------------------------------------------------------------> Element Listy Akorów
 let actorBasicComponent = {
     props: ['actor'],
     template: `
@@ -244,11 +345,50 @@ let actorBasicComponent = {
 }
 
 
+//-------------------------------------------------------------------------------------------------------------------> Lista Aktorów
+//-------------------------------------------------------------------------------------------------------------------> Lista Aktorów
 let actorsList = 
 {
-    props : ['actors'],
+    data(){
+        return {
+            actors: "",
+            title: "Dodaj Aktora",
+            actor: {
+                name: "",
+                placeOfBirth: "",
+                description: "", 
+                yearOfBirth: 1990,
+                heightCM: 150 
+            }
+        }
+    },
+    created() {
+        this.fetchData();
+    },
+    methods: {
+        fetchData()
+        {
+            axios.get(actorsBaseUrl)
+                .then(actorsResponse =>{
+                    this.actors = actorsResponse.data;
+                })
+                .catch(error => console.log(error));
+        },
+        addActor(actor)
+        {
+            if(actor.name != "" && actor.placeOfBirth != "" && actor.description !="" && actor.yearOfBirth != "" && actor.heightCM != "")
+            {
+                axios.post(actorsBaseUrl, actor)
+                    .then(response => this.actors.push(response.data))
+            }
+        }
+    },
     template: `
     <div>
+        <div style="display:flex">
+            <formA :actor=actor :title="title" v-on:editactorevent="addActor">
+            </formA>
+        </div>
     <h1>Aktorzy:</h1>
         <div>
             <div v-for="actor in actors">
@@ -260,5 +400,38 @@ let actorsList =
     components:
     {
         'actor': actorBasicComponent,
+        'formA': actorForm
     }
+}
+
+
+//--------------------------------------------------------------------------------------------------------------------------------> Role
+//--------------------------------------------------------------------------------------------------------------------------------> Role
+let roleComponent = {
+    props: ["role"],
+    template : `<div style="display: flex">
+                    <div style="float:left;width:90%">
+                        <div>
+                            <h1 style="color:blue">
+                                Role name: {{ role.role }}
+                            </h1>
+                            
+                        </div>
+                        <p>
+                            Actor: {{ role.actorId }}
+                        </p>
+                        <p>
+                            Movie: {{ role.filmId }}
+                        </p>
+                    </div>
+                    <div style="float:left;width:10%">
+                        <button v-on:click="$emit('edit', role)">
+                            Edytuj
+                        </button>
+                        <br/>
+                        <button v-on:click="$emit('delete', role)">
+                            Usuń
+                        </button>
+                    </div>
+                </div>`
 }

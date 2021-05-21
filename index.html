@@ -3,6 +3,7 @@
     
     <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
     <div id="app">
+        <!--
         <div style="display:flex">
             <div style="float:left;width:33%">
                 <h1>Dodaj film :</h1>
@@ -107,13 +108,8 @@
                 </form>
             </div>
         </div>
-        
-        <hr/>
-        <router-link to="/movies">filmy</router-link>
-        <router-link to="/actors">aktorzy</router-link>
-        <router-view></router-view>
          
-        <!--<hr/>
+        <hr/>
         <h1>Movies:</h1>
         <movie v-for="movie in movieDatabase" :key="(movie.id + 1)*100000000" :movie="movie" :cast="movieActors(movie.id)" 
             v-on:delete="deleteMovie" v-on:edit="editMovie" :movieEdited="movieEdited">
@@ -130,11 +126,17 @@
             v-on:delete="deleteActor" v-on:edit="editActor" >
         </actor>    -->
 
+        <hr/>
+        <div>
+            <router-link to="/movies">filmy</router-link>
+            <router-link to="/actors">aktorzy</router-link>
+            <router-view></router-view>
+        </div>
     </div>
     
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="formComponents.js"></script>
     <script src="./components.js"></script>
-    <script type="module" src="routesVueRouter.js"></script>
     <script type="module" src="./javascript.js"></script>
 </html>
