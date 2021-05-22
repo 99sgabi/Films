@@ -249,6 +249,7 @@ let filterForm = {
   data() {
       return {
             word: '',
+            year: '',
             sort: null,
             category: null
       }
@@ -257,6 +258,7 @@ let filterForm = {
       onSubmit() {
           let filter = {
               word: this.word,
+              year: this.year,
               sort: this.sort,
               category: this.category
           }
@@ -267,8 +269,15 @@ let filterForm = {
   template:
     `<form class="filter-form" @submit.prevent="onSubmit">
     <h3>Filtrowanie</h3>
+
+    <label for="word">Tytuł filmu </label>
     <input id="word" v-model="word">
 
+    <br>
+    <label for="year">Rok powstania </label>
+    <input type="number" id="year" v-model="year">
+
+    <br>
     <label for="category">Gatunek</label>
     <select id="category" v-model="category">
       <option></option>
@@ -298,6 +307,7 @@ let filterActorsForm = {
   data() {
       return {
             word: '',
+            year: '',
             sort: null
       }
   },
@@ -305,6 +315,7 @@ let filterActorsForm = {
       onSubmit() {
           let filter = {
               word: this.word,
+              year: this.year,
               sort: this.sort
           }
           this.$emit('filter-submitted', filter)
@@ -314,7 +325,12 @@ let filterActorsForm = {
   template:
     `<form class="filter-actors-form" @submit.prevent="onSubmit">
     <h3>Filtrowanie</h3>
+    <label for="word">Imie aktora </label>
     <input id="word" v-model="word">
+
+    <br>
+    <label for="year">Rok urodzenia </label>
+    <input type="number" id="year" v-model="year">
 
     <br>
     <label for="sort">Sortowanie:</label>

@@ -371,6 +371,9 @@ let moviesList =
                 if(filter.word !="")
                     for(let i=this.movies.length-1;i>=0; i--)
                         if(this.movies[i].name.indexOf(filter.word) == -1) this.movies.splice(i,1);
+                if(filter.year !="")
+                    for(let i=this.movies.length-1;i>=0; i--)
+                        if(parseInt(this.movies[i].dateOfRelease) != parseInt(filter.year)) this.movies.splice(i,1);
                 if(filter.sort == "Tytuły od A do Z")
                     this.movies.sort((a, b) =>
                         a.name.toLowerCase().localeCompare(b.name.toLowerCase()))
@@ -479,6 +482,9 @@ let actorsList =
                 if(filter.word !="")
                     for(let i=this.actors.length-1;i>=0; i--)
                         if(this.actors[i].name.indexOf(filter.word) == -1) this.actors.splice(i,1);
+                if(filter.year !="")
+                    for(let i=this.actors.length-1;i>=0; i--)
+                        if(this.actors[i].yearOfBirth+"" != filter.year+"") this.actors.splice(i,1);
                 if(filter.sort == "Imiona od A do Z")
                     this.actors.sort((a, b) =>
                         a.name.toLowerCase().localeCompare(b.name.toLowerCase()))
