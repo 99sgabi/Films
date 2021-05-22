@@ -242,3 +242,91 @@ let movieToActorForm = {
                 </form>
             </div>`
 };
+
+
+let filterForm = {
+    
+  data() {
+      return {
+            word: '',
+            sort: null,
+            category: null
+      }
+  },
+  methods: {
+      onSubmit() {
+          let filter = {
+              word: this.word,
+              sort: this.sort,
+              category: this.category
+          }
+          this.$emit('filter-submitted', filter)
+      }
+
+  },
+  template:
+    `<form class="filter-form" @submit.prevent="onSubmit">
+    <h3>Filtrowanie</h3>
+    <input id="word" v-model="word">
+
+    <label for="category">Gatunek</label>
+    <select id="category" v-model="category">
+      <option></option>
+      <option>komedia</option>
+      <option>romans</option>
+      <option>horror</option>
+      <option>dramat</option>
+    </select>
+
+    <br>
+    <label for="sort">Sortowanie:</label>
+    <select id="sort" v-model="sort">
+      <option>Tytuły od A do Z</option>
+      <option>Tytuły od Z do A</option>
+      <option>Lata powstania rosnąco</option>
+      <option>Lata powstania malejąco</option>
+    </select>
+
+    <br>
+    <input class="button" type="submit" value="Filtruj">
+  </form>`
+
+};
+
+let filterActorsForm = {
+    
+  data() {
+      return {
+            word: '',
+            sort: null
+      }
+  },
+  methods: {
+      onSubmit() {
+          let filter = {
+              word: this.word,
+              sort: this.sort
+          }
+          this.$emit('filter-submitted', filter)
+      }
+
+  },
+  template:
+    `<form class="filter-actors-form" @submit.prevent="onSubmit">
+    <h3>Filtrowanie</h3>
+    <input id="word" v-model="word">
+
+    <br>
+    <label for="sort">Sortowanie:</label>
+    <select id="sort" v-model="sort">
+      <option>Imiona od A do Z</option>
+      <option>Imiona od Z do A</option>
+      <option>Rok urodzenia rosnąco</option>
+      <option>Rok urodzenia malejąco</option>
+    </select>
+
+    <br>
+    <input class="button" type="submit" value="Filtruj">
+  </form>`
+
+};

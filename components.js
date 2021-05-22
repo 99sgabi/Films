@@ -7,6 +7,8 @@ var movieActorsURL = (id) => `http://localhost:3001/films/${id}/actors`;
 var moviesActorsAllURL = "http://localhost:3001/films/actors";
 var actorsMoviesAllURL = "http://localhost:3001/actors/films";
 var actorsMovieURL =  (id) => `http://localhost:3001/actors/${id}/films`;
+//var moviesFilterURL = (word,category,sort) => `http://localhost:3001/films/word=${word}/category=${category}/sort=${sort}`;
+var moviesFilterURL = (word) => `http://localhost:3001/films/word=${word}`;
 
 //-------------------------------------------------------------------------------------------------------------------> Szczegoly Filmu
 //-------------------------------------------------------------------------------------------------------------------> Szczegoly Filmu
@@ -314,6 +316,9 @@ let moviesList =
         <div v-for="movie in movies">
                 <movie :movie="movie"></movie>
         </div>
+        <div>
+        <formF @filter-submitted="filtration"></formF>
+        </div>
     </div>
     `,
     data(){
@@ -350,12 +355,45 @@ let moviesList =
                     .then(response => this.movies.push(response.data))
             }
             movie = this.movie;
+        },
+        filtration(filter)
+        {
+            console.log(filter)
+            //FILTEROWANIE I SORTOWANIE
+
+            //let word =  this.$route.params.word;
+            axios.get(moviesBaseUrl)
+            .then(moviesResponse =>{
+                this.movies = moviesResponse.data;
+                if(filter.category !="" && filter.category != null)
+                    for(let i=this.movies.length-1;i>=0; i--)
+                        if(this.movies[i].genere != filter.category) this.movies.splice(i,1);
+                if(filter.word !="")
+                    for(let i=this.movies.length-1;i>=0; i--)
+                        if(this.movies[i].name.indexOf(filter.word) == -1) this.movies.splice(i,1);
+                if(filter.sort == "Tytuły od A do Z")
+                    this.movies.sort((a, b) =>
+                        a.name.toLowerCase().localeCompare(b.name.toLowerCase()))
+                else if(filter.sort == "Tytuły od Z do A")
+                    this.movies.sort((a, b) =>
+                        b.name.toLowerCase().localeCompare(a.name.toLowerCase()))
+                else if(filter.sort == "Lata powstania rosnąco")
+                    this.movies.sort((a, b) =>
+                        parseInt(a.dateOfRelease) - parseInt(b.dateOfRelease))
+                else if(filter.sort == "Lata powstania malejąco")
+                    this.movies.sort((a, b) =>
+                        parseInt(b.dateOfRelease) - parseInt(a.dateOfRelease))
+
+
+            })
+            .catch(error => console.log(error));
         }
     },
     components:
     {
         'movie': movieBasicComponent,
-        'formE': movieForm
+        'formE': movieForm,
+        'formF': filterForm
     }
 }
 
@@ -429,6 +467,33 @@ let actorsList =
                 axios.post(actorsBaseUrl, actor)
                     .then(response => this.actors.push(response.data))
             }
+        },
+        filtration(filter)
+        {
+            console.log(filter)
+            //FILTEROWANIE I SORTOWANIE
+            
+            axios.get(actorsBaseUrl)
+                .then(actorsResponse =>{
+                    this.actors = actorsResponse.data;
+                if(filter.word !="")
+                    for(let i=this.actors.length-1;i>=0; i--)
+                        if(this.actors[i].name.indexOf(filter.word) == -1) this.actors.splice(i,1);
+                if(filter.sort == "Imiona od A do Z")
+                    this.actors.sort((a, b) =>
+                        a.name.toLowerCase().localeCompare(b.name.toLowerCase()))
+                else if(filter.sort == "Imiona od Z do A")
+                    this.actors.sort((a, b) =>
+                        b.name.toLowerCase().localeCompare(a.name.toLowerCase()))
+                else if(filter.sort == "Rok urodzenia rosnąco")
+                    this.actors.sort((a, b) =>
+                        parseInt(a.yearOfBirth) - parseInt(b.yearOfBirth))
+                else if(filter.sort == "Rok urodzenia malejąco")
+                    this.actors.sort((a, b) =>
+                        parseInt(b.yearOfBirth) - parseInt(a.yearOfBirth))
+
+
+            })
         }
     },
     template: `
@@ -442,12 +507,16 @@ let actorsList =
                 <actor :actor="actor"></actor> 
             </div>
         </div>
+        <div>
+        <formF @filter-submitted="filtration"></formF>
+        </div>
     </div>
     `,
     components:
     {
         'actor': actorBasicComponent,
-        'formA': actorForm
+        'formA': actorForm,
+        'formF': filterActorsForm
     }
 }
 
