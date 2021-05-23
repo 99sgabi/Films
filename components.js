@@ -359,7 +359,7 @@ let moviesList =
                 word: '',
                 year: '',
                 sort: null,
-                category: null
+                category: "romans"
             }
         }
         
@@ -420,8 +420,9 @@ let moviesList =
         //próba filtrowania w computed - nie wiem jak to wywołać
         filteredMovies() 
         {
-            console.log(this.filter.category)
-            return this.movies.filter(function(m) {return m.genere == this.filter.category})
+            console.log(this.filter.word)
+            let filter = this.filter;
+            return this.movies.filter(function(m) {return m.genere == filter.category})
             //return filter => this.movies.filter(function(m) {return m.genere == filter.category && m.name.indexOf(filter.word) != -1 && m.dateOfRelease == filter.year})
                 
         }

@@ -180,7 +180,7 @@ var mainElement = new Vue({
                     if(!found)
                     {
                         console.log(found)
-                        axios.post(castBaseUrl, cast)
+                        /*axios.post(castBaseUrl, cast)
                             .then(response => {
                                 axios.get(moviesActorsAllURL)
                                 .then(response =>{
@@ -188,7 +188,7 @@ var mainElement = new Vue({
                                 })
                                 .catch(error => console.log(error))     
                         })
-                        .catch(error => console.log(error))
+                        .catch(error => console.log(error))*/
                     }
                         
                     
@@ -200,7 +200,7 @@ var mainElement = new Vue({
                         actorId: this.roleActor.id,
                         filmId: this.roleFilm.id
                     }
-                    axios.put(castBaseUrl + "/" + this.roleEdited.id, role)
+                   /* axios.put(castBaseUrl + "/" + this.roleEdited.id, role)
                         .then(response => {
                             axios.get(moviesActorsAllURL)
                             .then(response =>{
@@ -213,7 +213,7 @@ var mainElement = new Vue({
                                 mainElement.actorsMoviesDatabase = response.data;
                             })     
                         })
-                        .catch(error => console.log(error))
+                        .catch(error => console.log(error))*/
                 }
             }
             this.roleName = ""
@@ -282,7 +282,7 @@ var mainElement = new Vue({
         },
         deleteActorFromTheMovie(role)
         {
-            axios.delete(castBaseUrl + "/" + role.id)
+            /*axios.delete(castBaseUrl + "/" + role.id)
                 .then(response => {
                     this.movieActorsDatabase.splice(
                         this.movieActorsDatabase.indexOf(role), 1
@@ -292,7 +292,7 @@ var mainElement = new Vue({
                     axios.get(actorsMoviesAllURL)
                         .then(response => {mainElement.actorsMoviesDatabase = response.data})
                         .catch(error => console.log(error))
-                })
+                })*/
         },
         editActor(actor)
         {
@@ -382,11 +382,11 @@ axios.get(moviesBaseUrl)
     })
     .catch(error => console.log(error))     
 
-axios.get(moviesActorsAllURL)
+/*axios.get(moviesActorsAllURL)
     .then(response =>{
         mainElement.movieActorsDatabase = response.data;
     })
-    .catch(error => console.log(error))   
+    .catch(error => console.log(error))   */
 
 axios.get(actorsBaseUrl)
     .then(response => {mainElement.actorsDatabase = response.data})
