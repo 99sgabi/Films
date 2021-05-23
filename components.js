@@ -313,7 +313,7 @@ let moviesList =
         <div>
             <formE :movie="movie" :title="title" v-on:editmovieevent="addMovie"> </formE>
         </div>
-        <div v-for="movie in movies">
+        <div v-for="movie in filteredMovies">
                 <movie :movie="movie"></movie>
         </div>
         <br>
@@ -346,7 +346,7 @@ let moviesList =
     `,
     data(){
         return {
-            movies: "",
+            movies: [],
             title: "Dodaj Film",
             movie: {                
                 avatar : "",
@@ -354,12 +354,20 @@ let moviesList =
                 description: "",
                 dateOfRelease: Date.now(),
                 genere : ""
+            },
+            filter: {
+                word: '',
+                year: '',
+                sort: null,
+                category: null
             }
         }
         
     },
     created() {
+        
         this.fetchData();
+        console.log(this.movies)
     },
     methods: {
         fetchData()
@@ -367,6 +375,7 @@ let moviesList =
             axios.get(moviesBaseUrl)
                 .then(moviesResponse =>{
                     this.movies = moviesResponse.data;
+                    console.log(this.movies)
                 })
                 .catch(error => console.log(error));
         },
@@ -381,14 +390,16 @@ let moviesList =
         },
         filtration(filter)
         {
-            console.log(filter)
             //FILTEROWANIE I SORTOWANIE
-                if(filter.category !="" && filter.category != null)
+                /*if(filter.category !="" && filter.category != null)
                     this.movies = this.movies.filter(m => m.genere == filter.category)
                 if(filter.word !="")
                     this.movies = this.movies.filter(m => m.name.indexOf(filter.word) != -1)
                 if(filter.year !="")
                     this.movies = this.movies.filter(m => parseInt(m.dateOfRelease) == filter.year)
+*/
+            this.filter = filter;
+            console.log(this.filter)
 
                 if(filter.sort == "Tytuły od A do Z")
                     this.movies.sort((a, b) =>
@@ -407,12 +418,13 @@ let moviesList =
     },
     computed: {
         //próba filtrowania w computed - nie wiem jak to wywołać
-        /*filteredMovies() 
+        filteredMovies() 
         {
-            return filter => this.movies.filter(function(m) {return m.genere == filter.category})
+            console.log(this.filter.category)
+            return this.movies.filter(function(m) {return m.genere == this.filter.category})
             //return filter => this.movies.filter(function(m) {return m.genere == filter.category && m.name.indexOf(filter.word) != -1 && m.dateOfRelease == filter.year})
                 
-        }*/
+        }
     },
     components:
     {
