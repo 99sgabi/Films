@@ -28,17 +28,16 @@ module.exports = function(){
 			genere: faker.helpers.randomize(['dramat','komedia','romans', 'horror'])
 			}
 		}),
-		cast: lodash.times(200, (n) => {
+		cast: lodash.times(198, (n) => {
 			let aId = faker.datatype.number({
 				'min': 0,
 				'max': 50
 			})
 			return{
-			id: {
-				filmId: Math.floor((n+1)/2),
-				actorId: n%2 == 0 ? 2*aId : 2*aId + 1 
-			},
-			role: faker.name.findName(),
+				id: n,
+					filmId: Math.floor((n+1)/2),
+					actorId: n%2 == 0 ? 2*aId : 2*aId + 1 ,
+				role: faker.name.findName(),
 			}
 		})
 	}
