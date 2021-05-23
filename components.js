@@ -316,6 +316,29 @@ let moviesList =
         <div v-for="movie in movies">
                 <movie :movie="movie"></movie>
         </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
         <div>
         <formF @filter-submitted="filtration"></formF>
         </div>
@@ -360,20 +383,13 @@ let moviesList =
         {
             console.log(filter)
             //FILTEROWANIE I SORTOWANIE
-
-            //let word =  this.$route.params.word;
-            axios.get(moviesBaseUrl)
-            .then(moviesResponse =>{
-                this.movies = moviesResponse.data;
                 if(filter.category !="" && filter.category != null)
-                    for(let i=this.movies.length-1;i>=0; i--)
-                        if(this.movies[i].genere != filter.category) this.movies.splice(i,1);
+                    this.movies = this.movies.filter(m => m.genere == filter.category)
                 if(filter.word !="")
-                    for(let i=this.movies.length-1;i>=0; i--)
-                        if(this.movies[i].name.indexOf(filter.word) == -1) this.movies.splice(i,1);
+                    this.movies = this.movies.filter(m => m.name.indexOf(filter.word) != -1)
                 if(filter.year !="")
-                    for(let i=this.movies.length-1;i>=0; i--)
-                        if(parseInt(this.movies[i].dateOfRelease) != parseInt(filter.year)) this.movies.splice(i,1);
+                    this.movies = this.movies.filter(m => parseInt(m.dateOfRelease) == filter.year)
+
                 if(filter.sort == "Tytuły od A do Z")
                     this.movies.sort((a, b) =>
                         a.name.toLowerCase().localeCompare(b.name.toLowerCase()))
@@ -387,10 +403,16 @@ let moviesList =
                     this.movies.sort((a, b) =>
                         parseInt(b.dateOfRelease) - parseInt(a.dateOfRelease))
 
-
-            })
-            .catch(error => console.log(error));
         }
+    },
+    computed: {
+        //próba filtrowania w computed - nie wiem jak to wywołać
+        /*filteredMovies() 
+        {
+            return filter => this.movies.filter(function(m) {return m.genere == filter.category})
+            //return filter => this.movies.filter(function(m) {return m.genere == filter.category && m.name.indexOf(filter.word) != -1 && m.dateOfRelease == filter.year})
+                
+        }*/
     },
     components:
     {
@@ -399,7 +421,6 @@ let moviesList =
         'formF': filterForm
     }
 }
-
 
 //---------------------------------------------------------------------------------------------------------------> Element Listy Akorów
 //---------------------------------------------------------------------------------------------------------------> Element Listy Akorów
@@ -476,15 +497,11 @@ let actorsList =
             console.log(filter)
             //FILTEROWANIE I SORTOWANIE
             
-            axios.get(actorsBaseUrl)
-                .then(actorsResponse =>{
-                    this.actors = actorsResponse.data;
                 if(filter.word !="")
-                    for(let i=this.actors.length-1;i>=0; i--)
-                        if(this.actors[i].name.indexOf(filter.word) == -1) this.actors.splice(i,1);
+                    this.actors = this.actors.filter(a => a.name.indexOf(filter.word) != -1)
                 if(filter.year !="")
-                    for(let i=this.actors.length-1;i>=0; i--)
-                        if(this.actors[i].yearOfBirth+"" != filter.year+"") this.actors.splice(i,1);
+                    this.actors = this.actors.filter(a => a.yearOfBirth == filter.year)
+
                 if(filter.sort == "Imiona od A do Z")
                     this.actors.sort((a, b) =>
                         a.name.toLowerCase().localeCompare(b.name.toLowerCase()))
@@ -498,8 +515,6 @@ let actorsList =
                     this.actors.sort((a, b) =>
                         parseInt(b.yearOfBirth) - parseInt(a.yearOfBirth))
 
-
-            })
         }
     },
     template: `
