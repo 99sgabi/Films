@@ -328,17 +328,6 @@ let moviesList =
         <br>
         <br>
         <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
         <div>
         <formF @filter-submitted="filtration"></formF>
         </div>
@@ -359,15 +348,13 @@ let moviesList =
                 word: '',
                 year: '',
                 sort: null,
-                category: "romans"
+                category: ""
             }
         }
         
     },
     created() {
-        
         this.fetchData();
-        console.log(this.movies)
     },
     methods: {
         fetchData()
@@ -375,7 +362,6 @@ let moviesList =
             axios.get(moviesBaseUrl)
                 .then(moviesResponse =>{
                     this.movies = moviesResponse.data;
-                    console.log(this.movies)
                 })
                 .catch(error => console.log(error));
         },
@@ -390,16 +376,13 @@ let moviesList =
         },
         filtration(filter)
         {
-            //FILTEROWANIE I SORTOWANIE
+            this.filter = filter;
                 /*if(filter.category !="" && filter.category != null)
                     this.movies = this.movies.filter(m => m.genere == filter.category)
                 if(filter.word !="")
                     this.movies = this.movies.filter(m => m.name.indexOf(filter.word) != -1)
                 if(filter.year !="")
                     this.movies = this.movies.filter(m => parseInt(m.dateOfRelease) == filter.year)
-*/
-            this.filter = filter;
-            console.log(this.filter)
 
                 if(filter.sort == "Tytuły od A do Z")
                     this.movies.sort((a, b) =>
@@ -412,19 +395,41 @@ let moviesList =
                         parseInt(a.dateOfRelease) - parseInt(b.dateOfRelease))
                 else if(filter.sort == "Lata powstania malejąco")
                     this.movies.sort((a, b) =>
-                        parseInt(b.dateOfRelease) - parseInt(a.dateOfRelease))
+                        parseInt(b.dateOfRelease) - parseInt(a.dateOfRelease))*/
 
         }
     },
     computed: {
-        //próba filtrowania w computed - nie wiem jak to wywołać
         filteredMovies() 
         {
-            console.log(this.filter.word)
+            console.log(this.filter)
             let filter = this.filter;
-            return this.movies.filter(function(m) {return m.genere == filter.category})
-            //return filter => this.movies.filter(function(m) {return m.genere == filter.category && m.name.indexOf(filter.word) != -1 && m.dateOfRelease == filter.year})
-                
+            let filterMovies = [];
+            filterMovies = this.movies;
+
+            if(filter.category !="" && filter.category != null)
+                filterMovies = filterMovies.filter(m => m.genere == filter.category)
+            if(filter.word !="")
+                filterMovies = filterMovies.filter(m => m.name.toLowerCase().indexOf(filter.word.toLowerCase()) != -1)
+            if(filter.year !="")
+                filterMovies = filterMovies.filter(m => parseInt(m.dateOfRelease) == filter.year)
+
+            if(filter.sort == "Tytuły od A do Z")
+                filterMovies.sort((a, b) =>
+                    a.name.toLowerCase().localeCompare(b.name.toLowerCase()))
+            else if(filter.sort == "Tytuły od Z do A")
+                filterMovies.sort((a, b) =>
+                    b.name.toLowerCase().localeCompare(a.name.toLowerCase()))
+            else if(filter.sort == "Lata powstania rosnąco")
+                filterMovies.sort((a, b) =>
+                    parseInt(a.dateOfRelease) - parseInt(b.dateOfRelease))
+            else if(filter.sort == "Lata powstania malejąco")
+                filterMovies.sort((a, b) =>
+                    parseInt(b.dateOfRelease) - parseInt(a.dateOfRelease))
+
+            console.log(filterMovies)
+            return filterMovies
+            
         }
     },
     components:
@@ -482,6 +487,11 @@ let actorsList =
                 description: "", 
                 yearOfBirth: 1990,
                 heightCM: 150 
+            },
+            filter: {
+                word: '',
+                year: '',
+                sort: null
             }
         }
     },
@@ -507,9 +517,8 @@ let actorsList =
         },
         filtration(filter)
         {
-            console.log(filter)
-            //FILTEROWANIE I SORTOWANIE
-            
+            this.filter = filter;
+            /*
                 if(filter.word !="")
                     this.actors = this.actors.filter(a => a.name.indexOf(filter.word) != -1)
                 if(filter.year !="")
@@ -526,8 +535,40 @@ let actorsList =
                         parseInt(a.yearOfBirth) - parseInt(b.yearOfBirth))
                 else if(filter.sort == "Rok urodzenia malejąco")
                     this.actors.sort((a, b) =>
+                        parseInt(b.yearOfBirth) - parseInt(a.yearOfBirth))*/
+
+        }
+    },
+    computed: {
+        filteredActors() 
+        {
+            console.log(this.filter)
+            let filter = this.filter;
+            let filterActors = [];
+            filterActors = this.actors;
+
+
+            if(filter.word !="")
+                filterActors = filterActors.filter(a => a.name.toLowerCase().indexOf(filter.word.toLowerCase()) != -1)
+            if(filter.year !="")
+                filterActors = filterActors.filter(a => a.yearOfBirth == filter.year)
+
+                if(filter.sort == "Imiona od A do Z")
+                    filterActors.sort((a, b) =>
+                        a.name.toLowerCase().localeCompare(b.name.toLowerCase()))
+                else if(filter.sort == "Imiona od Z do A")
+                    filterActors.sort((a, b) =>
+                        b.name.toLowerCase().localeCompare(a.name.toLowerCase()))
+                else if(filter.sort == "Rok urodzenia rosnąco")
+                    filterActors.sort((a, b) =>
+                        parseInt(a.yearOfBirth) - parseInt(b.yearOfBirth))
+                else if(filter.sort == "Rok urodzenia malejąco")
+                    filterActors.sort((a, b) =>
                         parseInt(b.yearOfBirth) - parseInt(a.yearOfBirth))
 
+            console.log(filterActors)
+            return filterActors
+            
         }
     },
     template: `
@@ -537,7 +578,7 @@ let actorsList =
             </formA>
         </div>
         <div>
-            <div v-for="actor in actors">
+            <div v-for="actor in filteredActors">
                 <actor :actor="actor"></actor> 
             </div>
         </div>
