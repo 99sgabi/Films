@@ -150,7 +150,8 @@ let actorComponent =
         return {
             actor: "",    
             movies: "",
-            title: "Edytuj"  
+            title: "Edytuj",
+            show: true
         }
     },
     created() {
@@ -221,52 +222,55 @@ let actorComponent =
                         .catch(error => console.log(error))
                 }
             }
+        },
+        showForm(){
+            this.show = !this.show;
         }
     },
     components: {
-        'formA': actorForm,
+        'formA': actorDetailsForm,
         'formCast': movieToActorForm,
     },
-    template : `<div>
-                <div class="actor-components-List">
-                    <div style="margin:10px;">
-                        <div>
-                            <h1 style="color:blue">
-                                Actor name: {{ actor.name }}
-                            </h1>
-                            
+    template : `<div v-bind:class="{show: show}">
+                    <div class="actor-component">
+                        <div style="margin:10px;">
+                            <div>
+                                <h1 style="color:blue">
+                                    Actor name: {{ actor.name }}
+                                </h1>
+                                
+                            </div>
+                            <p>
+                                Description: {{ actor.description }}
+                            </p>
+                            <p>
+                                Place Of Birth: {{ actor.placeOfBirth }}
+                            </p>
+                            <p>
+                                height: {{ actor.heightCM }}
+                            </p>
+                            <ul>
+                                <li v-for="movie in movies" v-bind:key="(movie.filmId + 1)*1000">
+                                {{ movie.film && movie.film.name }}
+                                <button v-on:click="deleteMovie(movie)"> 
+                                    Usuń film
+                                </button>
+                                </li>
+                            </ul>
                         </div>
-                        <p>
-                            Description: {{ actor.description }}
-                        </p>
-                        <p>
-                            Place Of Birth: {{ actor.placeOfBirth }}
-                        </p>
-                        <p>
-                            height: {{ actor.heightCM }}
-                        </p>
-                        <ul>
-                            <li v-for="movie in movies" v-bind:key="(movie.filmId + 1)*1000">
-                            {{ movie.film && movie.film.name }}
-                            <button v-on:click="deleteMovie(movie)"> 
-                                Usuń film
+                        <div style="margin:10px;">
+                            <button v-on:click="showForm()">
+                                Edytuj
                             </button>
-                            </li>
-                        </ul>
+                            <br/>
+                            <button v-on:click="deleteActor(actor)">
+                                Usuń
+                            </button>
+                        </div>
                     </div>
-                    <div style="margin:10px;">
-                        <button v-on:click="$emit('editActorEvent', actor)">
-                            Edytuj
-                        </button>
-                        <br/>
-                        <button v-on:click="deleteActor(actor)">
-                            Usuń
-                        </button>
-                    </div>
-                 </div>
                     
-                <formA :actor="actor" :title="title" v-on:editactorevent="editActor"> </formA>
-                <formCast :actorId="actor.id" v-on:addrole="addMovieToActor"></formCast>
+                    <formA :actor="actor" :title="title" v-on:editactorevent="editActor"> </formA>
+                    <formCast :actorId="actor.id" v-on:addrole="addMovieToActor"></formCast>
                 </div>`
 }
 
@@ -309,26 +313,13 @@ let movieBasicComponent = {
 let moviesList = 
 {
     template: `
-    <div >
+    <div class="list">
         <div>
             <formE :movie="movie" :title="title" v-on:editmovieevent="addMovie"> </formE>
         </div>
         <div v-for="movie in filteredMovies">
                 <movie :movie="movie"></movie>
         </div>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <div>
         <formF @filter-submitted="filtration"></formF>
         </div>
     </div>
@@ -572,10 +563,9 @@ let actorsList =
         }
     },
     template: `
-    <div>
-        <div style="display:flex">
-            <formA :actor=actor :title="title" v-on:editactorevent="addActor">
-            </formA>
+    <div class="list">
+        <div>
+            <formA :actor=actor :title="title" v-on:editactorevent="addActor"></formA>
         </div>
         <div>
             <div v-for="actor in filteredActors">
@@ -583,7 +573,7 @@ let actorsList =
             </div>
         </div>
         <div>
-        <formF @filter-submitted="filtration"></formF>
+            <formF @filter-submitted="filtration"></formF>
         </div>
     </div>
     `,

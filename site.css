@@ -1,8 +1,22 @@
 body{
     font-family:Arial, Helvetica, sans-serif;
+    background-color: #eee;
+}
+.nav{
+    background-color: skyblue;
+    width: 100%;
+    padding: 0px;
+    margin-top: 0px;
+    position: fixed;
+}
+.content{
     margin-left: 200px;
     margin-right: 200px;
-
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 60px;
+    height: 1135px;
+    background-color: #fff;
 }
 .list-button{
     position: absolute;
@@ -32,6 +46,20 @@ body{
     font-size: 16px;
     margin: 4px 2px;
     cursor: pointer;
+    border-radius: 5px;
+}
+.button:hover{
+    background-color: rgb(165, 216, 236);
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
 }
 button{
     background-color: skyblue;
@@ -45,6 +73,9 @@ button{
     margin: 4px 2px;
     cursor: pointer;
 }
+button:hover{
+    background-color: rgb(165, 216, 236);
+}
 img{
     width:100%;
     display: flex;
@@ -57,13 +88,39 @@ img{
     top: 100px;
     margin-left: 0px;
 }
+.actor-form{
+    background-color: rgb(188, 221, 235);
+    align-items: center;
+    text-align: center;
+    width: 300px;
+    height: 400px;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.5s ease-in-out;
+}
+.show .actor-form{
+    transform: translateX(-300px);    
+}
 .role-form{
+    z-index:1000;
+    height:30px;
+    width:60px;
+    top: 550px;
+    margin-left: 0px;
+}
+.filter-form, .filter-actors-form{
     position:fixed;
     z-index:1000;
     height:30px;
     width:60px;
     top: 550px;
     margin-left: 0px;
+}
+.list{
+    width: 100%;
+    height: 1130px;
+    overflow: hidden;
+    overflow-y: scroll;
 }
 .actor-components-List{
     display: grid;
@@ -72,14 +129,8 @@ img{
     border-width: 3px;
     grid-template-columns: 70% 30%;
     margin-left:400px;
-}
-.movie-details{
-    display: grid;
-    border-style: solid;
-    border-radius: 10px;
-    border-width: 3px;
-    grid-template-columns: 70% 30%;
-    top: 200px;
+    overflow: hidden;
+    overflow-y: scroll;
 }
 .movie-components-List{
     display: grid;
@@ -88,4 +139,21 @@ img{
     border-width: 3px;
     grid-template-columns: 30% 40% 30%;
     margin-left:400px;
+}
+.actor-component{
+    display: grid;
+    border-style: solid;
+    border-radius: 10px;
+    border-width: 3px;
+    grid-template-columns: 70% 30%;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+.movie-details{
+    display: grid;
+    border-style: solid;
+    border-radius: 10px;
+    border-width: 3px;
+    grid-template-columns: 70% 30%;
+    top: 200px;
 }

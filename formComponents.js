@@ -82,39 +82,92 @@ let actorForm = {
     },
     template: `
     <div class="form">
-        
-        <h1>{{title}}</h1>
-        <form v-on:submit.prevent="edit">
-            <label>
-                Imię aktora:
-            </label><br/>
-            <input v-model="actor.name">
-            <br/>
-            <label>
-                Opis:
-            </label>
-            <br/>
-            <textarea v-model="actor.description"></textarea>
-            <br/>
-            <label>
-                Rok urodzenia:
-            </label>
-            <br/>
-            <input type="number" v-model="actor.yearOfBirth">
-            <br/>
-            <label>
-                Miejsce urodzenia:
-            </label><br/>
-            <input v-model="actor.placeOfBirth">
-            <br/>
-            <label>
-                Wzrost:
-            </label>
-            <br/>
-            <input type="number" v-model="actor.heightCM">
-            <br/>
-            <input type="submit" class="button" value="Wyślij">
-        </form>
+        <div>
+            <h1>{{title}}</h1>
+            <form v-on:submit.prevent="edit">
+                <label>
+                    Imię aktora:
+                </label><br/>
+                <input v-model="actor.name">
+                <br/>
+                <label>
+                    Opis:
+                </label>
+                <br/>
+                <textarea v-model="actor.description"></textarea>
+                <br/>
+                <label>
+                    Rok urodzenia:
+                </label>
+                <br/>
+                <input type="number" v-model="actor.yearOfBirth">
+                <br/>
+                <label>
+                    Miejsce urodzenia:
+                </label><br/>
+                <input v-model="actor.placeOfBirth">
+                <br/>
+                <label>
+                    Wzrost:
+                </label>
+                <br/>
+                <input type="number" v-model="actor.heightCM">
+                <br/>
+                <input type="submit" class="button" value="Wyślij">
+            </form>
+        </div>
+    </div>
+    `
+}
+let actorDetailsForm = {
+    props: ['title', 'actor'],
+    methods: {
+        edit()
+        {
+            this.$emit('editactorevent', this.$props.actor)
+        }
+    },
+    template: `
+    <div style="
+        position:absolute;
+        overflow: hidden;
+        top:70px;
+        right:400px;
+    ">
+        <div class="actor-form">
+            <h1>{{title}}</h1>
+            <form v-on:submit.prevent="edit">
+                <label>
+                    Imię aktora:
+                </label><br/>
+                <input v-model="actor.name">
+                <br/>
+                <label>
+                    Opis:
+                </label>
+                <br/>
+                <textarea v-model="actor.description"></textarea>
+                <br/>
+                <label>
+                    Rok urodzenia:
+                </label>
+                <br/>
+                <input type="number" v-model="actor.yearOfBirth">
+                <br/>
+                <label>
+                    Miejsce urodzenia:
+                </label><br/>
+                <input v-model="actor.placeOfBirth">
+                <br/>
+                <label>
+                    Wzrost:
+                </label>
+                <br/>
+                <input type="number" v-model="actor.heightCM">
+                <br/>
+                <input type="submit" class="button" value="Wyślij">
+            </form>
+        </div>
     </div>
     `
 }
