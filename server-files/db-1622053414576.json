@@ -811,49 +811,49 @@
   ],
   "films": [
     {
-      "id": 0,
-      "name": "praesentium",
       "avatar": "http://placeimg.com/640/480/nightlife",
+      "name": "praesentium",
       "description": "Hic eius quas iure voluptatibus. Et animi enim veniam sit autem perferendis. Magni incidunt voluptas omnis quaerat dolorem et qui. Numquam ipsum aperiam odio ut eveniet voluptate consequatur laborum ipsa. Asperiores laudantium soluta.",
       "dateOfRelease": "2020-12-17T01:57:37.966Z",
       "genere": "horror",
-      "viewed": false
+      "viewed": false,
+      "id": 0
     },
     {
-      "id": 1,
-      "name": "quia",
       "avatar": "http://placeimg.com/640/480/transport",
+      "name": "quia",
       "description": "Quia repellendus dignissimos recusandae ut pariatur. Eos id amet doloremque. Dicta omnis quod est animi expedita voluptates a. Praesentium voluptas perspiciatis ipsam quo molestias corporis eos. Possimus ipsam nesciunt mollitia fugiat est qui dolores consequuntur sed. Magnam illo non.",
       "dateOfRelease": "2021-04-04T12:20:21.885Z",
       "genere": "dramat",
-      "viewed": false
+      "viewed": false,
+      "id": 1
     },
     {
-      "id": 2,
-      "name": "et",
       "avatar": "http://placeimg.com/640/480/city",
+      "name": "et",
       "description": "Velit et laboriosam voluptas cum consectetur ipsum est ipsa rerum. Perspiciatis cumque sunt facilis. Aliquid asperiores autem amet eaque recusandae aut. Nobis ea aut minus at aliquid dolorem facere. Quis illum et neque molestias.",
       "dateOfRelease": "2021-05-26T03:36:29.476Z",
       "genere": "komedia",
-      "viewed": false
+      "viewed": false,
+      "id": 2
     },
     {
-      "id": 3,
-      "name": "quos",
       "avatar": "http://placeimg.com/640/480/city",
+      "name": "quos",
       "description": "Explicabo perspiciatis quis hic dolore placeat blanditiis. Praesentium velit perferendis libero quia voluptatem iusto quod sunt.",
       "dateOfRelease": "2020-11-26T00:55:16.492Z",
       "genere": "romans",
-      "viewed": false
+      "viewed": true,
+      "id": 3
     },
     {
-      "id": 4,
-      "name": "necessitatibus",
       "avatar": "http://placeimg.com/640/480/cats",
+      "name": "necessitatibus",
       "description": "Eum qui rerum nisi cumque. Itaque placeat facere omnis id modi laudantium pariatur. Molestiae omnis placeat. Alias repudiandae totam officiis sed aliquid. Odit quis quia impedit voluptas beatae consequatur nam maiores libero. Sit atque explicabo non rerum ex molestiae et aut.",
       "dateOfRelease": "2020-10-22T20:13:22.893Z",
       "genere": "horror",
-      "viewed": false
+      "viewed": true,
+      "id": 4
     },
     {
       "id": 5,
@@ -1722,12 +1722,6 @@
   ],
   "cast": [
     {
-      "id": 0,
-      "filmId": 0,
-      "actorId": 28,
-      "role": "Lionel Bosco MD"
-    },
-    {
       "id": 1,
       "filmId": 1,
       "actorId": 47,
@@ -1738,12 +1732,6 @@
       "filmId": 1,
       "actorId": 36,
       "role": "Rhonda Cruickshank"
-    },
-    {
-      "id": 3,
-      "filmId": 2,
-      "actorId": 101,
-      "role": "Arthur Bechtelar"
     },
     {
       "id": 4,

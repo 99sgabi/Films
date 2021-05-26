@@ -19,7 +19,8 @@ let movieComponent =
             movie: "",    
             cast: "",
             title: "Edytuj",
-            movieDate: ""  
+            movieDate: "" ,
+            viewed: false
         }
     },
     created() {
@@ -39,6 +40,7 @@ let movieComponent =
                     this.cast = moviesResponse.data;
                 })
                 .catch(error => console.log(error))
+
         },
         deleteMovie(movie)
         {
@@ -90,6 +92,20 @@ let movieComponent =
                         .catch(error => console.log(error))
                 }
             }
+        },
+        setViewed(movie)
+        {
+            this.viewed = !movie.viewed
+            axios.put(moviesBaseUrl+ "/" + movie.id, {
+                avatar : movie.avatar,
+                name: movie.name,
+                description: movie.description,
+                dateOfRelease: movie.dateOfRelease,
+                genere : movie.genere,
+                viewed: this.viewed
+            })
+            .then(response => {
+                this.movie = response.data })
         }
     },
     components: {
@@ -122,17 +138,29 @@ let movieComponent =
                                 </button>
                                 </li>
                             </ul>
+
+                            <div style="float:left;width:10%">
+
+                                <button v-on:click="setViewed(movie)" v-if="!movie.viewed" class="viewed-button">
+                                    Obejrzałem
+                                </button>
+                                <button v-on:click="setViewed(movie)" v-else class="unviewed-button">
+                                    Usuń z oglądanych
+                                </button>
+
+                                <button v-on:click="$emit('editmovieevent', movie)">
+                                    Edytuj
+                                </button>
+                                <br/>
+                                <button v-on:click="deleteMovie(movie)">
+                                    Usuń
+                                </button>
+                            </div>
+
                         </div>
+                        
                     </div>
-                    <div style="float:left;width:10%">
-                        <button v-on:click="$emit('editmovieevent', movie)">
-                            Edytuj
-                        </button>
-                        <br/>
-                        <button v-on:click="deleteMovie(movie)">
-                            Usuń
-                        </button>
-                    </div>
+                    
                     
                 </div>
                 <formE :movie="movie" :title="title" v-on:editmovieevent="editMovie"> </formE>
@@ -431,6 +459,7 @@ let moviesList =
     }
 }
 
+
 //---------------------------------------------------------------------------------------------------------------> Element Listy Akorów
 //---------------------------------------------------------------------------------------------------------------> Element Listy Akorów
 let actorBasicComponent = {
@@ -582,6 +611,107 @@ let actorsList =
         'actor': actorBasicComponent,
         'formA': actorForm,
         'formF': filterActorsForm
+    }
+}
+
+let viewedMovieComponent = {
+    props: ['movie'],
+    template: `
+    <div class="viewed-movie-components">
+        <div style="margin:5px;">
+            <img :src="movie.avatar"/>
+        </div>
+        <div style="margin: 5px;">
+            <div>
+                <h1 style="color:blue">
+                    Movie name: {{ movie.name }}
+                </h1>
+                            
+            </div>
+            <p>
+                Date: {{ movie.dateOfRelease }}
+            </p>
+            <p>
+                Genere: {{ movie.genere }}
+            </p>
+            <p>
+                Description: {{ movie.description }}
+            </p>
+        </div>
+        <div style="position: relative">
+            <router-link class="list-button" :to="{ name: 'movie', params: { id: movie.id }}">Szczegoly</router-link>
+        </div>
+    </div>`
+}
+
+let viewedList = 
+{
+    template: `
+    <div class="favourite-list">
+        <div v-for="movie in viewedMovies">
+                <movie :movie="movie"></movie>
+        </div>
+    </div>
+    `,
+    data(){
+        return {
+            movies: [],
+            title: "Dodaj Film",
+            movie: {                
+                avatar : "",
+                name: "",
+                description: "",
+                dateOfRelease: Date.now(),
+                genere : ""
+            },
+            filter: {
+                word: '',
+                year: '',
+                sort: null,
+                category: ""
+            }
+        }
+        
+    },
+    created() {
+        this.fetchData();
+    },
+    methods: {
+        fetchData()
+        {
+            axios.get(moviesBaseUrl)
+                .then(moviesResponse =>{
+                    this.movies = moviesResponse.data;
+                })
+                .catch(error => console.log(error));
+        },
+        addMovie(movie)
+        {
+            if(movie.name != "" && movie.description != "" && movie.genere !="" && movie.dateOfRelease != "")
+            {
+                axios.post(moviesBaseUrl, movie)
+                    .then(response => this.movies.push(response.data))
+            }
+            movie = this.movie;
+        },
+    },
+    computed: {
+        viewedMovies() 
+        {
+            let viewedMovies = [];
+            this.movies.forEach(element => {
+                if(element.viewed == true){
+                    viewedMovies.push(element)
+                }
+            });
+
+            return viewedMovies
+            
+        }
+    },
+    components:
+    {
+        'movie': viewedMovieComponent,
     }
 }
 

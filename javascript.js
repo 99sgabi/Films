@@ -24,7 +24,12 @@ const routes =[
             actors: mainElement.actorsDatabase
         }),
         name: 'actorsList'
-    }
+    },
+    { 
+        path: '/viewed', 
+        component: viewedList,
+        name: 'viewedList'
+    },
 ];
 const router = new VueRouter({ routes});
 
