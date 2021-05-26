@@ -25,7 +25,8 @@ module.exports = function(){
 			avatar: faker.image.image(),
 			description: faker.lorem.sentences(),
 			dateOfRelease: faker.date.past() ,
-			genere: faker.helpers.randomize(['dramat','komedia','romans', 'horror'])
+			genere: faker.helpers.randomize(['dramat','komedia','romans', 'horror']),
+			viewed: false
 			}
 		}),
 		cast: lodash.times(198, (n) => {
