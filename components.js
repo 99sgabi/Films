@@ -309,7 +309,7 @@ let movieBasicComponent = {
     props: ['movie'],
     template: `
     <div class="movie-components-List">
-        <div style="margin:5px;">
+        <div style="display:grid; place-items:center; margin:5px;">
             <img :src="movie.avatar"/>
         </div>
         <div style="margin: 5px;">

@@ -6,7 +6,7 @@ body{
     background-color: #eee;
 }
 .nav{
-    background-color: skyblue;
+    background-color: #0666F6;
     width: 100%;
     padding: 0px;
     margin-top: 0px;
@@ -17,9 +17,9 @@ body{
     margin-right: 200px;
     padding-left: 40px;
     padding-right: 40px;
-    padding-top: 60px;
-    height: 1135px;
-    background-color: #fff;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    height: 850px;
 }
 .list-button{
     position: absolute;
@@ -27,8 +27,9 @@ body{
     left:50%;
     transform: translateX(-50%);
 
-    background-color: skyblue;
+    background-color: #0666F6;
     border: none;
+    border-radius: 50px;
     color: white;
     padding: 15px 32px;
     text-align: center;
@@ -38,8 +39,11 @@ body{
     margin: 4px 2px;
     cursor: pointer;
 }
+.list-button:hover{
+    background-color: #70a9ff;
+}
 .button{
-    background-color: skyblue;
+    background-color: #0666F6;
     border: none;
     color: white;
     padding: 15px 32px;
@@ -52,7 +56,7 @@ body{
     border-radius: 5px;
 }
 .button:hover{
-    background-color: rgb(165, 216, 236);
+    background-color: #579afd;
     border: none;
     color: white;
     padding: 15px 32px;
@@ -65,7 +69,7 @@ body{
     border-radius: 5px;
 }
 button{
-    background-color: skyblue;
+    background-color: #0666F6;
     border: none;
     color: white;
     padding: 15px 32px;
@@ -77,7 +81,7 @@ button{
     cursor: pointer;
 }
 button:hover{
-    background-color: rgb(165, 216, 236);
+    background-color: #5d9eff;
 }
 .viewed-button{
     background-color: rgb(105, 219, 70);
@@ -119,11 +123,14 @@ img{
     position:fixed;
     z-index:1000;
     top: 100px;
+    width: 300px;
     margin-left: 0px;
+    background-color: white;
+    padding: 40px;
+    box-shadow: 5px 5px 20px rgb(216, 216, 216);
 }
 .actor-form{
-    background-color: rgb(188, 221, 235);
-    align-items: center;
+    background-color: #65a2ff;
     text-align: center;
     width: 300px;
     height: 400px;
@@ -136,71 +143,77 @@ img{
 }
 .role-form{
     z-index:1000;
-    height:30px;
-    width:60px;
     top: 550px;
     margin-left: 0px;
+    background-color: white;
+    padding: 40px;
+    box-shadow: 5px 5px 20px rgb(216, 216, 216);
 }
 .filter-form, .filter-actors-form{
     position:fixed;
     z-index:1000;
     height:30px;
-    width:60px;
+    width: 300px;
+    height: 325px;
     top: 550px;
     margin-left: 0px;
+    background-color: white;
+    padding: 40px;
+    box-shadow: 5px 5px 20px rgb(216, 216, 216);
 }
 .list{
     width: 100%;
-    height: 1130px;
+    height: 850px;
     overflow: hidden;
+    padding-right: 30px;
     overflow-y: scroll;
 }
 .favourite-list{
     width: 100%;
-    height: 1130px;
+    height: 850px;
     overflow: hidden;
     overflow-y: scroll;
 }
 .actor-components-List{
     display: grid;
-    border-style: solid;
-    border-radius: 10px;
-    border-width: 3px;
     grid-template-columns: 70% 30%;
     margin-left:400px;
+    margin-bottom:40px;
     overflow: hidden;
-    overflow-y: scroll;
+    background-color: #fff;
+    box-shadow: 5px 5px 20px rgb(216, 216, 216);
+    padding: 40px;
 }
 .movie-components-List{
     display: grid;
-    border-style: solid;
-    border-radius: 10px;
-    border-width: 3px;
     grid-template-columns: 30% 40% 30%;
     margin-left:400px;
+    margin-bottom:40px;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 5px 5px 20px rgb(216, 216, 216);
 }
 .viewed-movie-components{
     display: grid;
-    border-style: solid;
-    border-radius: 10px;
-    border-width: 3px;
     grid-template-columns: 30% 40% 30%;
     margin-left:0px;
+    margin-bottom:40px;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 5px 5px 20px rgb(216, 216, 216);
 }
 .actor-component{
     display: grid;
-    border-style: solid;
-    border-radius: 10px;
     border-width: 3px;
     grid-template-columns: 70% 30%;
     overflow: hidden;
-    overflow-y: scroll;
+    background-color: #fff;
+    box-shadow: 5px 5px 20px rgb(216, 216, 216);
 }
 .movie-details{
     display: grid;
-    border-style: solid;
-    border-radius: 10px;
-    border-width: 3px;
     grid-template-columns: 70% 30%;
     top: 200px;
+    background-color: #fff;
+    box-shadow: 5px 5px 20px rgb(216, 216, 216);
 }

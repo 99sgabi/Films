@@ -825,7 +825,7 @@
       "description": "Quia repellendus dignissimos recusandae ut pariatur. Eos id amet doloremque. Dicta omnis quod est animi expedita voluptates a. Praesentium voluptas perspiciatis ipsam quo molestias corporis eos. Possimus ipsam nesciunt mollitia fugiat est qui dolores consequuntur sed. Magnam illo non.",
       "dateOfRelease": "2021-04-04T12:20:21.885Z",
       "genere": "dramat",
-      "viewed": false,
+      "viewed": true,
       "id": 1
     },
     {
@@ -834,7 +834,7 @@
       "description": "Velit et laboriosam voluptas cum consectetur ipsum est ipsa rerum. Perspiciatis cumque sunt facilis. Aliquid asperiores autem amet eaque recusandae aut. Nobis ea aut minus at aliquid dolorem facere. Quis illum et neque molestias.",
       "dateOfRelease": "2021-05-26T03:36:29.476Z",
       "genere": "komedia",
-      "viewed": false,
+      "viewed": true,
       "id": 2
     },
     {
@@ -852,7 +852,7 @@
       "description": "Eum qui rerum nisi cumque. Itaque placeat facere omnis id modi laudantium pariatur. Molestiae omnis placeat. Alias repudiandae totam officiis sed aliquid. Odit quis quia impedit voluptas beatae consequatur nam maiores libero. Sit atque explicabo non rerum ex molestiae et aut.",
       "dateOfRelease": "2020-10-22T20:13:22.893Z",
       "genere": "horror",
-      "viewed": true,
+      "viewed": false,
       "id": 4
     },
     {

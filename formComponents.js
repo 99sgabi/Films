@@ -28,7 +28,6 @@ let movieForm = {
     },
     template: `
         <div class="form">
-        <h1>Filmy:</h1>
         <h1>{{ title }}:</h1>
 
         <form v-on:submit.prevent="edit">
@@ -132,7 +131,7 @@ let actorDetailsForm = {
         position:absolute;
         overflow: hidden;
         top:70px;
-        right:400px;
+        right:200px;
     ">
         <div class="actor-form">
             <h1>{{title}}</h1>
