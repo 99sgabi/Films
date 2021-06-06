@@ -300,7 +300,7 @@ let movieToActorForm = {
                     <br/>
                     
                     <br/>
-                    <input type="submit" value="Wyślij">
+                    <button type="submit" value="Wyślij">Dodaj role</button>
                 </form>
             </div>`
 };

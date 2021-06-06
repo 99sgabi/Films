@@ -42,10 +42,11 @@ body{
     font-size: 16px;
     margin: 4px 2px;
     cursor: pointer;
-    transition: linear 0.2s;
+    transition: ease-in-out 0.2s;
 }
 .list-button:hover{
     background-color: #70a9ff;
+    border-radius: 5px;
 }
 .button{
     background-color: #0666F6;
@@ -58,8 +59,8 @@ body{
     font-size: 16px;
     margin: 4px 2px;
     cursor: pointer;
-    border-radius: 5px;
-    transition: linear 0.2s;
+    border-radius: 50px;
+    transition: ease-in-out 0.2s;
 }
 .button:hover{
     background-color: #579afd;
@@ -73,6 +74,7 @@ body{
     margin: 4px 2px;
     cursor: pointer;
     border-radius: 5px;
+    
 }
 button{
     background-color: #0666F6;
@@ -85,9 +87,12 @@ button{
     font-size: 16px;
     margin: 4px 2px;
     cursor: pointer;
+    border-radius: 50px;
+    transition: ease-in-out 0.2s;
 }
 button:hover{
     background-color: #5d9eff;
+    border-radius: 5px;
 }
 .viewed-button{
     background-color: rgb(105, 219, 70);
@@ -189,7 +194,7 @@ img{
     background-color: #fff;
     box-shadow: 5px 5px 20px rgb(216, 216, 216);
     padding: 40px;
-    transition: linear 0.2s;
+    transition: ease-in-out 0.2s;
 }
 .actor-components-List:hover{
     transform: translateZ(1px);
@@ -202,7 +207,7 @@ img{
     padding: 20px;
     background-color: #fff;
     box-shadow: 5px 5px 20px rgb(216, 216, 216);
-    transition: linear 0.2s;
+    transition: ease-in-out 0.2s;
 }
 .movie-components-List:hover{
     transform: translateZ(2px);
