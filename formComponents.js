@@ -131,7 +131,7 @@ let actorDetailsForm = {
         position:absolute;
         overflow: hidden;
         top:70px;
-        right:200px;
+        right:10px;
     ">
         <div class="actor-form">
             <h1>{{title}}</h1>

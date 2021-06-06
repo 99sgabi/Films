@@ -4,6 +4,7 @@
 body{
     font-family:Arial, Helvetica, sans-serif;
     background-color: #eee;
+    background-size: 500px;
 }
 .nav{
     background-color: #0666F6;
@@ -11,6 +12,7 @@ body{
     padding: 0px;
     margin-top: 0px;
     position: fixed;
+    z-index: 100;
 }
 .content{
     margin-left: 200px;
@@ -19,7 +21,9 @@ body{
     padding-right: 40px;
     padding-top: 100px;
     padding-bottom: 100px;
-    height: 850px;
+    height: 950px;
+    background-color: #eee;
+    perspective: 100px;
 }
 .list-button{
     position: absolute;
@@ -38,6 +42,7 @@ body{
     font-size: 16px;
     margin: 4px 2px;
     cursor: pointer;
+    transition: linear 0.2s;
 }
 .list-button:hover{
     background-color: #70a9ff;
@@ -54,6 +59,7 @@ body{
     margin: 4px 2px;
     cursor: pointer;
     border-radius: 5px;
+    transition: linear 0.2s;
 }
 .button:hover{
     background-color: #579afd;
@@ -183,6 +189,10 @@ img{
     background-color: #fff;
     box-shadow: 5px 5px 20px rgb(216, 216, 216);
     padding: 40px;
+    transition: linear 0.2s;
+}
+.actor-components-List:hover{
+    transform: translateZ(1px);
 }
 .movie-components-List{
     display: grid;
@@ -192,6 +202,10 @@ img{
     padding: 20px;
     background-color: #fff;
     box-shadow: 5px 5px 20px rgb(216, 216, 216);
+    transition: linear 0.2s;
+}
+.movie-components-List:hover{
+    transform: translateZ(2px);
 }
 .viewed-movie-components{
     display: grid;
