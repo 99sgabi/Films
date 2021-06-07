@@ -125,10 +125,10 @@ let movieComponent =
                                 
                             </div>
                             <p>
-                                Date: {{ movie.dateOfRelease }}
+                                Data: {{ movie.dateOfRelease }}
                             </p>
                             <p>
-                                Genere: {{ movie.genere }}
+                                Gatunek: {{ movie.genere }}
                             </p>
                             <ul>
                                 <li v-for="role in cast" v-bind:key="(role.actorId + 1)*1000000">
@@ -244,10 +244,11 @@ let actorComponent =
                 }
                 if(!found)
                 {
-                    axios.post(castBaseUrl, role)
+                    let roleToSee = role.roleToSee;
+                    axios.post(castBaseUrl, role.roleToDB)
                         .then(response => {
-                            console.log(response.data)
-                            this.movies.push(response.data)
+                            console.log(roleToSee)
+                            this.movies.push(roleToSee)
                         })
                         .catch(error => console.log(error))
                 }
@@ -271,13 +272,13 @@ let actorComponent =
                                 
                             </div>
                             <p>
-                                Description: {{ actor.description }}
+                                Opis: {{ actor.description }}
                             </p>
                             <p>
-                                Place Of Birth: {{ actor.placeOfBirth }}
+                                Urodzony(a) w: {{ actor.placeOfBirth }}
                             </p>
                             <p>
-                                height: {{ actor.heightCM }}
+                                Wzrost: {{ actor.heightCM }}
                             </p>
                             <ul>
                                 <li v-for="movie in movies" v-bind:key="(movie.filmId + 1)*1000">
@@ -317,18 +318,18 @@ let movieBasicComponent = {
         <div style="margin: 5px;">
             <div>
                 <h1 style="color:blue">
-                    Movie name: {{ movie.name }}
+                    Nazwa filmu: {{ movie.name }}
                 </h1>
                             
             </div>
             <p>
-                Date: {{ movie.dateOfRelease }}
+                Data: {{ movie.dateOfRelease }}
             </p>
             <p>
-                Genere: {{ movie.genere }}
+                Gatunek: {{ movie.genere }}
             </p>
             <p>
-                Description: {{ movie.description }}
+                Opis: {{ movie.description }}
             </p>
         </div>
         <div style="position: relative">
@@ -476,16 +477,16 @@ let actorBasicComponent = {
                             
             </div>
                 <p>
-                    Description: {{ actor.description }}
+                    Opis: {{ actor.description }}
                 </p>
                 <p>
-                    Place Of Birth: {{ actor.placeOfBirth }}
+                    Urodzony(a) w: {{ actor.placeOfBirth }}
                 </p>
                 <p>
-                    height: {{ actor.heightCM }}
+                    Wzrost: {{ actor.heightCM }}
                 </p>
                 <p>
-                    yearOfBirth: {{ actor.yearOfBirth }}
+                    Rok urodzenia: {{ actor.yearOfBirth }}
                 </p> 
         </div>
         <div style="margin:10px; position: relative">
@@ -626,18 +627,18 @@ let viewedMovieComponent = {
         <div style="margin: 5px;">
             <div>
                 <h1 style="color:blue">
-                    Movie name: {{ movie.name }}
+                    Nazwa filmu: {{ movie.name }}
                 </h1>
                             
             </div>
             <p>
-                Date: {{ movie.dateOfRelease }}
+                Data: {{ movie.dateOfRelease }}
             </p>
             <p>
-                Genere: {{ movie.genere }}
+                Gatunek: {{ movie.genere }}
             </p>
             <p>
-                Description: {{ movie.description }}
+                Opis: {{ movie.description }}
             </p>
         </div>
         <div style="position: relative">
@@ -726,15 +727,15 @@ let roleComponent = {
                     <div style="float:left;width:90%">
                         <div>
                             <h1 style="color:blue">
-                                Role name: {{ role.role }}
+                                Rola: {{ role.role }}
                             </h1>
                             
                         </div>
                         <p>
-                            Actor: {{ role.actorId }}
+                            Aktor: {{ role.actorId }}
                         </p>
                         <p>
-                            Movie: {{ role.filmId }}
+                            Film: {{ role.filmId }}
                         </p>
                     </div>
                     <div style="float:left;width:10%">

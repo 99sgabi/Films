@@ -273,7 +273,17 @@ let movieToActorForm = {
                 filmId: this.role.film.id,
                 role:  this.role.role
             }
-            this.$emit('addrole', roleToEmit)
+
+            let item = {
+                roleToDB: roleToEmit,
+                roleToSee:{
+                    actorId: this.$props.actorId,
+                    filmId: this.role.film.id,
+                    role:  this.role.role,
+                    film: this.role.film
+                }
+            }
+            this.$emit('addrole', item)
             this.role =  {
                 filmId: -1,
                 actorId: -1,
