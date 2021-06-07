@@ -20,7 +20,8 @@ let movieComponent =
             cast: "",
             title: "Edytuj",
             movieDate: "" ,
-            viewed: false
+            viewed: false,
+            show: true
         }
     },
     created() {
@@ -106,16 +107,19 @@ let movieComponent =
             })
             .then(response => {
                 this.movie = response.data })
+        },
+        showForm(){
+            this.show = !this.show;
         }
     },
     components: {
-        'formE': movieForm,
+        'formE': movieDetailsForm,
         'formCast': actorToMovieForm
     },
-    template : `<div style="top: 30px;">
+    template : `<div v-bind:class="{show: show}" style="top: 30px;">
                     <div class="movie-details">
                         <div style="margin:50px">
-                            <img :src="movie.avatar"/>
+                            <img :src="movie.avatar" style="width:80%;"/>
                         </div>
                         <div style="float:left;width:70%">
                             <div>
@@ -148,7 +152,7 @@ let movieComponent =
                                     Usuń z oglądanych
                                 </button>
 
-                                <button v-on:click="$emit('editmovieevent', movie)">
+                                <button v-on:click="showForm()">
                                     Edytuj
                                 </button>
                                 <br/>
@@ -158,15 +162,12 @@ let movieComponent =
                             </div>
 
                         </div>
+
+                        <formE :movie="movie" :title="title" v-on:editmovieevent="editMovie"> </formE>
+                        <formCast :movieId="movie.id" v-on:addrole="addActorToMovie"></formCast>
                         
                     </div>
                     
-                    <div style="display: grid;">
-                        <formE :movie="movie" :title="title" v-on:editmovieevent="editMovie"> </formE>
-                        <formCast :movieId="movie.id" v-on:addrole="addActorToMovie" class="filter-form"></formCast>
-                    </div>
-
-
                 </div>`
 }//)
 
@@ -687,15 +688,6 @@ let viewedList =
                     this.movies = moviesResponse.data;
                 })
                 .catch(error => console.log(error));
-        },
-        addMovie(movie)
-        {
-            if(movie.name != "" && movie.description != "" && movie.genere !="" && movie.dateOfRelease != "")
-            {
-                axios.post(moviesBaseUrl, movie)
-                    .then(response => this.movies.push(response.data))
-            }
-            movie = this.movie;
         },
     },
     computed: {
