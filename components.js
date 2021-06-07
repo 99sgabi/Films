@@ -242,10 +242,11 @@ let actorComponent =
                 }
                 if(!found)
                 {
-                    axios.post(castBaseUrl, role)
+                    let roleToSee = role.roleToSee;
+                    axios.post(castBaseUrl, role.roleToDB)
                         .then(response => {
-                            console.log(response.data)
-                            this.movies.push(response.data)
+                            console.log(roleToSee)
+                            this.movies.push(roleToSee)
                         })
                         .catch(error => console.log(error))
                 }
