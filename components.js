@@ -84,10 +84,15 @@ let movieComponent =
                 }
                 if(!found)
                 {
-                    axios.post(castBaseUrl, role)
+                    let id =  this.$route.params.id;
+                    let roleToSee = role.roleToSee
+                    axios.post(castBaseUrl, role.roleToDB)
                         .then(response => {
-                            console.log(response.data)
-                            this.cast.push(response.data)
+                            axios.get(movieActorsURL(id))
+                                .then(moviesResponse =>{
+                                    this.cast = moviesResponse.data;
+                                })
+                                .catch(error => console.log(error))
                         })
                         .catch(error => console.log(error))
                 }
@@ -242,11 +247,17 @@ let actorComponent =
                 }
                 if(!found)
                 {
+                    let id =  this.$route.params.id;
                     let roleToSee = role.roleToSee;
                     axios.post(castBaseUrl, role.roleToDB)
                         .then(response => {
-                            console.log(roleToSee)
-                            this.movies.push(roleToSee)
+                            axios.get(actorsMovieURL(id))
+                                .then(actorsResponse =>{
+                                    this.movies = actorsResponse.data;
+                                })
+                                .catch(error => console.log(error))
+                            //console.log(roleToSee)
+                            //this.movies.push(roleToSee)
                         })
                         .catch(error => console.log(error))
                 }
