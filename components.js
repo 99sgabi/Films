@@ -161,10 +161,12 @@ let movieComponent =
                         
                     </div>
                     
-                    
-                </div>
-                <formE :movie="movie" :title="title" v-on:editmovieevent="editMovie"> </formE>
-                <formCast :movieId="movie.id" v-on:addrole="addActorToMovie"></formCast>
+                    <div style="display: grid;">
+                        <formE :movie="movie" :title="title" v-on:editmovieevent="editMovie"> </formE>
+                        <formCast :movieId="movie.id" v-on:addrole="addActorToMovie" class="filter-form"></formCast>
+                    </div>
+
+
                 </div>`
 }//)
 
