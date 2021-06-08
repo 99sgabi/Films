@@ -70,6 +70,84 @@ let movieForm = {
     `
 }
 
+let movieDetailsForm = {
+    props: ['title', 'movie'],
+    methods: {
+        edit()
+        {
+            this.$props.movie.dateOfRelease = new Date(Date.parse(this.movieDate));
+            this.$emit('editmovieevent', this.$props.movie)
+        }
+    },
+    computed: {
+        movieDate: {
+            // getter
+            get: function () {
+                let dateOfRelease = new Date(Date.parse(this.$props.movie.dateOfRelease));
+                let y = dateOfRelease.getFullYear();
+                let m = dateOfRelease.getMonth() + 1 < 10 ? "0" + (dateOfRelease.getMonth() + 1) : (dateOfRelease.getMonth() + 1);
+                let d = dateOfRelease.getDate() < 10 ? "0" + dateOfRelease.getDate() : dateOfRelease.getDate();
+                return `${y}-${m}-${d}`
+            },
+            // setter
+            set: function (newValue) {
+                this.$props.movie.dateOfRelease = new Date(Date.parse(newValue));
+            }
+        }
+    },
+    template: `
+        <div div style="
+        position:absolute;
+        overflow: hidden;
+        top:500px;
+        right:100px;
+        ">
+        <div class="movie-form">
+
+        <h1>{{ title }}:</h1>
+
+        <form v-on:submit.prevent="edit">
+            <label>
+                Tytuł:
+            </label><br/>
+            <input v-model="movie.name">
+            <br/>
+            <label>
+                Opis:
+            </label>
+            <br/>
+            <textarea v-model="movie.description"></textarea>
+            <br/>
+            <label>
+                Data:
+            </label>
+            <br/>
+            <input type="date" v-model="movieDate">
+            <br/>
+            <label>
+                Gatunek:
+            </label>
+            <br/>
+            <select v-model="movie.genere">
+                <option>komedia</option>
+                <option>romans</option>
+                <option>horror</option>
+                <option>dramat</option>
+            </select>   
+            <br/>
+            <label>
+                Url do plakatu:
+            </label><br/>
+            <input type="url" v-model="movie.avatar">
+            <br/>
+            <input type="submit" class="button" value="Wyślij">
+        </form>
+
+        </div>
+    </div>
+    `
+}
+
 
 let actorForm = {
     props: ['title', 'actor'],
@@ -218,7 +296,7 @@ let actorToMovieForm = {
         }
     },
     template: `
-            <div class="form">
+            <div class="role-form">
                 <h1>Dodaj aktora:</h1>
                 <form v-on:submit.prevent="addActor">
                     <label>
@@ -235,7 +313,7 @@ let actorToMovieForm = {
                     <br/>
                     
                     <br/>
-                    <input type="submit" value="Wyślij">
+                    <button type="submit" value="Wyślij">Wyślij</button>
                 </form>
             </div>`
 };
@@ -304,7 +382,7 @@ let movieToActorForm = {
                     <br/>
                     
                     <br/>
-                    <input type="submit" value="Wyślij">
+                    <button type="submit" value="Wyślij">Dodaj role</button>
                 </form>
             </div>`
 };
