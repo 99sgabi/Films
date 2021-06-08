@@ -284,8 +284,12 @@ let actorToMovieForm = {
                 actorId: this.role.actor.id,
                 role:  this.role.role
             }
+            let item = {
+                roleToEmit: roleToEmit,
+                actor:this.role.actor
+            }
 
-            this.$emit('addrole', roleToEmit)
+            this.$emit('addrole', item)
             this.role =  {
                 filmId: -1,
                 actorId: -1,
@@ -352,6 +356,11 @@ let movieToActorForm = {
                 actorId: this.$props.actorId,
                 filmId: this.role.film.id,
                 role:  this.role.role
+            }
+
+            let item = {
+                roleToEmit: roleToEmit,
+                movie:this.role.film
             }
 
             this.$emit('addrole', roleToEmit)

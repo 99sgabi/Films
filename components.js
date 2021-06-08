@@ -85,15 +85,16 @@ let movieComponent =
                 }
                 if(!found)
                 {
-                    let id =  this.$route.params.id;
-                    let roleToSee = role.roleToSee
-                    axios.post(castBaseUrl, role.roleToDB)
+                    let actor = role.actor
+                    axios.post(castBaseUrl, role.roleToEmit)
                         .then(response => {
-                            axios.get(movieActorsURL(id))
-                                .then(moviesResponse =>{
-                                    this.cast = moviesResponse.data;
-                                })
-                                .catch(error => console.log(error))
+                            let item = {
+                                filmId: response.data.filmId,
+                                actorId: response.data.actorId,
+                                role: response.data.role,
+                                actor: actor
+                            }
+                            this.cast.push(item)
                         })
                         .catch(error => console.log(error))
                 }
@@ -250,17 +251,17 @@ let actorComponent =
                 }
                 if(!found)
                 {
-                    let id =  this.$route.params.id;
-                    let roleToSee = role.roleToSee;
-                    axios.post(castBaseUrl, role.roleToDB)
+                    let movie = role.movie;
+                    axios.post(castBaseUrl, role.roleToEmit)
                         .then(response => {
-                            axios.get(actorsMovieURL(id))
-                                .then(actorsResponse =>{
-                                    this.movies = actorsResponse.data;
-                                })
-                                .catch(error => console.log(error))
-                            //console.log(roleToSee)
-                            //this.movies.push(roleToSee)
+                            console.log()
+                            let item = {
+                                filmId: response.data.filmId,
+                                actorId: response.data.actorId,
+                                role: response.data.role,
+                                film: movie
+                            }
+                            this.movies.push(item)
                         })
                         .catch(error => console.log(error))
                 }
