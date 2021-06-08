@@ -88,13 +88,19 @@ let movieComponent =
                     let actor = role.actor
                     axios.post(castBaseUrl, role.roleToEmit)
                         .then(response => {
-                            let item = {
+                            axios.get(movieActorsURL(this.movie.id))
+                                .then(moviesResponse =>{
+                                    this.cast = moviesResponse.data;
+                                })
+                                .catch(error => console.log(error))
+                            /*let item = {
                                 filmId: response.data.filmId,
                                 actorId: response.data.actorId,
                                 role: response.data.role,
                                 actor: actor
                             }
                             this.cast.push(item)
+                            console.log(item)*/
                         })
                         .catch(error => console.log(error))
                 }
@@ -254,14 +260,19 @@ let actorComponent =
                     let movie = role.movie;
                     axios.post(castBaseUrl, role.roleToEmit)
                         .then(response => {
-                            console.log()
+                            axios.get(actorsMovieURL(this.actor.id))
+                                .then(actorsResponse =>{
+                                    this.movies = actorsResponse.data;
+                                })
+                                .catch(error => console.log(error))
+                            /*console.log()
                             let item = {
                                 filmId: response.data.filmId,
                                 actorId: response.data.actorId,
                                 role: response.data.role,
                                 film: movie
                             }
-                            this.movies.push(item)
+                            this.movies.push(item)*/
                         })
                         .catch(error => console.log(error))
                 }

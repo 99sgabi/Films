@@ -363,7 +363,7 @@ let movieToActorForm = {
                 movie:this.role.film
             }
 
-            this.$emit('addrole', roleToEmit)
+            this.$emit('addrole', item)
             this.role =  {
                 filmId: -1,
                 actorId: -1,
